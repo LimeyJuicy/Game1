@@ -372,3 +372,8 @@ All five browser scenarios passed after the palm-down clarification: revised car
 
 - User requested committing and pushing current work. Repository is on main with no configured remote; requested destination URL while preparing the local commit. Included current source, tests, design/history documents, supplied animation assets and preserved experiments; dependencies/generated builds remain ignored. Existing user deletions are preserved.
 - Verification: all 97 game tests pass; game and showcase TypeScript/production builds pass with bundle-size advisories. Targeted secret-pattern search returned no matches; git diff --check passed. No new gameplay/model/animation implementation this session. The previously requested model-only viewer UI has not yet been implemented; the rejected carry experiment remains documented as rejected. Push requires the destination repository.
+
+### 2026-11-18 — Local commit created; remote pending
+
+- Created local main commit fffe7df containing the current project (153 files). Push remains pending because no remote is configured and destination URL has been requested.
+- Clarification of earlier whitespace check: the initial unstaged check passed; after staging previously untracked files, Git reported whitespace/CRLF notices in supplied third-party README/license text. Preserved those vendor files unchanged. No generated dependencies/build directories or matching secret patterns were included.
