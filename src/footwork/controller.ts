@@ -39,6 +39,8 @@ interface Swing {
   bulge: number;
   active: boolean; done: boolean;
   fromX: number; fromZ: number; fromYaw: number; fromLift: number; fromPitch: number;
+  /** A fixed world-space landing spot, instead of the guard position around where the body will be. */
+  pin: { x: number; z: number; yaw: number } | null;
 }
 
 export interface Move {
@@ -169,7 +171,7 @@ export function createFootwork(options: FootworkOptions = {}) {
     move.cruise = Math.hypot(x, z) / Math.max(1e-6, (end - start) * move.duration);
   }
   function swing(foot: 0 | 1, role: Role, start: number, end: number, apex: number, landOn: LandOn, swingPitch = 0, push = 0, bulge = 0): Swing {
-    return { foot, role, start, end, apex, landOn, swingPitch, push, bulge, active: false, done: false, fromX: 0, fromZ: 0, fromYaw: 0, fromLift: 0, fromPitch: 0 };
+    return { foot, role, start, end, apex, landOn, swingPitch, push, bulge, active: false, done: false, fromX: 0, fromZ: 0, fromYaw: 0, fromLift: 0, fromPitch: 0, pin: null };
   }
 
   /** Start a move, carrying over whatever speed the body already has. */
@@ -182,6 +184,18 @@ export function createFootwork(options: FootworkOptions = {}) {
       move.speed = Math.min(Math.max(0, s.rootVelX * dx + s.rootVelZ * dz), 2.5 * move.cruise);
       s.glideX = s.rootVelX - dx * move.speed; s.glideZ = s.rootVelZ - dz * move.speed;
     } else { s.glideX = s.rootVelX; s.glideZ = s.rootVelZ; }
+    // A foot caught in the air by an interruption has to come down. If the new
+    // move swings it anyway, that swing starts now; otherwise it lands where the
+    // guard wants it around where the body is at this moment.
+    for (const foot of [0, 1] as const) {
+      if (s.feet[foot].planted) continue;
+      const planned = move.swings.find(item => item.foot === foot);
+      if (planned) { planned.start = 0; continue; }
+      const role = roleOf(foot, move.endLead), home = footHome(stanceById(move.endStance), move.endLead, role), world = toWorld(s.root, home);
+      const landing = swing(foot, role, 0, Math.min(0.12, move.duration * 0.4), 0.01, 'flat');
+      landing.pin = { x: world.x, z: world.z, yaw: s.root.yaw + home.yaw };
+      move.swings.push(landing);
+    }
     move.hipsFrom = { ...s.hipsTarget };
     s.move = move; s.idle = 0;
   }
@@ -378,14 +392,15 @@ export function createFootwork(options: FootworkOptions = {}) {
       }
       if (!item.active) continue;
       const u = clamp01((move.t - item.start) / (item.end - item.start)), eased = smooth(u);
-      const home = footHome(stance, move.endLead, item.role, move.endPose, move.depth), target = toWorld(root, home);
+      const home = footHome(stance, move.endLead, item.role, move.endPose, move.depth);
+      const target = item.pin ?? toWorld(root, home), heading = item.pin ? item.pin.yaw : root.yaw + home.yaw;
       const side = item.foot === 0 ? -1 : 1, bow = item.bulge * Math.sin(Math.PI * u) * side;
       foot.x = mix(item.fromX, target.x, eased) + Math.cos(s.root.yaw) * bow;
       foot.z = mix(item.fromZ, target.z, eased) - Math.sin(s.root.yaw) * bow;
-      foot.yaw = item.fromYaw + wrap(root.yaw + home.yaw - item.fromYaw) * eased;
+      foot.yaw = item.fromYaw + wrap(heading - item.fromYaw) * eased;
       foot.lift = item.fromLift * (1 - eased) + Math.max(0, item.apex - item.fromLift * 0.5) * Math.sin(Math.PI * u) ** 1.2;
       foot.pitch = mix(item.fromPitch, item.swingPitch, smooth(u / 0.35));
-      if (u >= 1) { item.active = false; item.done = true; foot.x = target.x; foot.z = target.z; foot.yaw = root.yaw + home.yaw; plant(foot, item.foot, item.landOn, move.kind); }
+      if (u >= 1) { item.active = false; item.done = true; foot.x = target.x; foot.z = target.z; foot.yaw = heading; plant(foot, item.foot, item.landOn, move.kind); }
     }
   }
 
@@ -453,10 +468,13 @@ export function createFootwork(options: FootworkOptions = {}) {
     setIntent(direction: Point | null) {
       s.intent = direction && Math.hypot(direction.x, direction.z) > 0.01 ? { x: direction.x, z: direction.z } : null;
     },
-    /** Ask for a move. It starts now if nothing is running, otherwise when the current move ends. */
-    request(command: Command) {
-      if (s.move) { s.queue = command; return false; }
-      run(command); return true;
+    /**
+     * Ask for a move. It starts now if nothing is running, otherwise when the
+     * current move ends. With `now` it replaces whatever is running.
+     */
+    request(command: Command, now = false) {
+      if (s.move && !now) { s.queue = command; return false; }
+      s.queue = null; run(command); return true;
     },
     step(x: number, z: number) { return this.request({ type: 'step', x, z }); },
     pass(ahead = true) { return this.request({ type: 'pass', forward: ahead }); },
