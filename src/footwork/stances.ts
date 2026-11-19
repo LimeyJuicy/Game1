@@ -113,6 +113,8 @@ export const TUNING = {
   glideHalfLife: 0.03,
   /** Hip smoothing. Smaller is snappier. */
   hipHalfLife: 0.045,
+  /** Body acceleration (m/s²) the hips follow rigidly. A harder stop or shove makes the hips carry on briefly and settle. */
+  hipInertia: 9,
   /** Time for a landed heel or ball to roll flat, and for a heel to rise before the foot leaves. */
   rollTime: 0.09, pushTime: 0.07,
   /** Idle breathing: hip height variation in metres. */
