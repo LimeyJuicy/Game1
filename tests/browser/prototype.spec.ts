@@ -1,0 +1,65 @@
+import { expect, test } from '@playwright/test';
+
+test('movement prototype loads, moves, sprints, pauses and resizes', async ({ page }) => {
+  const errors: string[] = [];
+  page.on('pageerror', error => errors.push(error.message));
+  await page.goto('/?debug&quality=low');
+  await expect(page.getByRole('button', { name: 'Begin', exact: true })).toBeVisible();
+  await page.getByRole('button', { name: 'Begin', exact: true }).click();
+  await expect(page.locator('#overlay')).toBeHidden();
+  const state = () => page.evaluate(() => (window as any).__prototype);
+  const initial = await state();
+  await page.keyboard.down('KeyW');
+  await expect.poll(async () => (await state()).gameTime - initial.gameTime, { timeout: 20000 }).toBeGreaterThanOrEqual(0.5);
+  await page.keyboard.up('KeyW');
+  const walking = await state();
+  const walkDistance = initial.position.z - walking.position.z;
+  const walkSpeed = walkDistance / (walking.gameTime - initial.gameTime);
+  expect(walkDistance).toBeGreaterThan(1);
+  await page.keyboard.down('ShiftLeft');
+  await page.keyboard.down('KeyW');
+  await expect.poll(async () => (await state()).gameTime - walking.gameTime, { timeout: 20000 }).toBeGreaterThanOrEqual(0.5);
+  await page.keyboard.up('KeyW');
+  await page.keyboard.up('ShiftLeft');
+  const running = await state();
+  const runSpeed = (walking.position.z - running.position.z) / (running.gameTime - walking.gameTime);
+  expect(runSpeed).toBeGreaterThan(walkSpeed * 1.3);
+  await page.keyboard.press('Escape');
+  const paused = await state();
+  await page.keyboard.down('KeyD');
+  await page.waitForTimeout(300);
+  await page.keyboard.up('KeyD');
+  expect((await state()).position).toEqual(paused.position);
+  await page.getByRole('button', { name: 'Resume', exact: true }).click();
+  await page.waitForTimeout(200);
+  expect((await state()).position).toEqual(paused.position);
+  await page.setViewportSize({ width: 900, height: 600 });
+  await expect(page.locator('#game')).toHaveJSProperty('clientWidth', 900);
+  await page.screenshot({ path: 'artifacts/movement-prototype.png' });
+  expect(errors).toEqual([]);
+});
+
+test('wall stops sustained sprint and losing focus pauses movement', async ({ page }) => {
+  await page.goto('/?debug&quality=low');
+  await page.getByRole('button', { name: 'Begin', exact: true }).click();
+  await page.keyboard.down('ShiftLeft');
+  await page.keyboard.down('KeyD');
+  await expect.poll(async () => (await page.evaluate(() => (window as any).__prototype.cameraYaw)), { timeout: 20000 }).toBeLessThan(-0.8);
+  await expect.poll(async () => (await page.evaluate(() => (window as any).__prototype.position.x)), { timeout: 25000 }).toBeGreaterThan(19);
+  await page.keyboard.up('KeyD');
+  await page.keyboard.up('ShiftLeft');
+  const stopped = await page.evaluate(() => (window as any).__prototype.position);
+  expect(stopped.x).toBeLessThanOrEqual(19.15);
+  expect(stopped.x).toBeGreaterThan(19);
+  const nearWall = await page.evaluate(() => (window as any).__prototype);
+  expect(Math.hypot(nearWall.camera.x - stopped.x, nearWall.camera.z - stopped.z)).toBeGreaterThan(6);
+  // Turning into the run traces an arc rather than snapping instantly sideways.
+  expect(stopped.z).toBeLessThan(4.9);
+  await page.screenshot({ path: 'artifacts/camera-near-wall.png' });
+  await page.keyboard.down('KeyW');
+  await page.evaluate(() => window.dispatchEvent(new Event('blur')));
+  await expect(page.getByRole('button', { name: 'Resume', exact: true })).toBeVisible();
+  const paused = await page.evaluate(() => (window as any).__prototype.position);
+  await page.waitForTimeout(200);
+  expect(await page.evaluate(() => (window as any).__prototype.position)).toEqual(paused);
+});

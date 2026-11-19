@@ -1,0 +1,49 @@
+{
+  "samples": [
+    {
+      "name": "Walk_Loop",
+      "minimumElbowBendDegrees": 95.39700086967973,
+      "maximumElbowBendDegrees": 98.79691659355298,
+      "handSwingRangeMeters": 0.15707246280143106,
+      "fixedSocketAndFingerGrip": true,
+      "backOfHandFacesUp": true,
+      "minimumSampledTipHeight": 1.0695465041525722,
+      "maximumHandError": 2.3303586748755946e-7,
+      "maximumReachAdjustment": 6.206335383118183e-17
+    },
+    {
+      "name": "Sprint_Loop",
+      "minimumElbowBendDegrees": 94.43274465262286,
+      "maximumElbowBendDegrees": 100.66103040633581,
+      "handSwingRangeMeters": 0.2173958746800999,
+      "fixedSocketAndFingerGrip": true,
+      "backOfHandFacesUp": true,
+      "minimumSampledTipHeight": 0.918490389735199,
+      "maximumHandError": 2.3303586748755946e-7,
+      "maximumReachAdjustment": 6.206335383118183e-17
+    },
+    {
+      "name": "Jog_Fwd_Loop",
+      "minimumElbowBendDegrees": 93.78961113709765,
+      "maximumElbowBendDegrees": 99.68008464163798,
+      "handSwingRangeMeters": 0.25292897495309896,
+      "fixedSocketAndFingerGrip": true,
+      "backOfHandFacesUp": true,
+      "minimumSampledTipHeight": 0.9054473456335009,
+      "maximumHandError": 2.3303586748755946e-7,
+      "maximumReachAdjustment": 6.206335383118183e-17
+    },
+    {
+      "name": "Walk_Formal_Loop",
+      "minimumElbowBendDegrees": 97.27984923353236,
+      "maximumElbowBendDegrees": 98.55605927066078,
+      "handSwingRangeMeters": 0.04586870029242478,
+      "fixedSocketAndFingerGrip": true,
+      "backOfHandFacesUp": true,
+      "minimumSampledTipHeight": 1.0766685878143984,
+      "maximumHandError": 2.3303586748755946e-7,
+      "maximumReachAdjustment": 6.206335383118183e-17
+    }
+  ],
+  "scope": "Native reference rig, sampled flat-ground blade-tip clearance and untouched source-joint comparison. No continuous collision/armor clearance certification."
+}

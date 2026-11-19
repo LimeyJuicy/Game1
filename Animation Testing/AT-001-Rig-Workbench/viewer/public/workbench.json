@@ -1,0 +1,63 @@
+{
+  "experiment": "AT-001",
+  "source": "Examplerig.blend",
+  "working_copy": "working/Examplerig-testing.blend",
+  "source_sha256": "ce4685323b42fc2f477eb65d18c296033de50d6e008af3c851426ac1ae7aeb60",
+  "working_sha256": "ce4685323b42fc2f477eb65d18c296033de50d6e008af3c851426ac1ae7aeb60",
+  "bytes": 845404,
+  "blend_header": "BLENDER_v276",
+  "header_version": "2.76",
+  "recorded_utc": "2026-11-19T01:01:06.702703+00:00",
+  "blender_available": false,
+  "export_available": false,
+  "inspection_status": "Pending Blender installation; header and copy verified only.",
+  "asset_provenance": "User supplied; source/reuse terms not yet recorded.",
+  "pointer_bits": 32,
+  "embedded_thumbnail": {
+    "width": 128,
+    "height": 128,
+    "note": "Saved-file thumbnail only; not a new render or verified rig preview."
+  },
+  "reference_model": {
+    "name": "Human locomotion reference",
+    "url": "/reference/Soldier.glb",
+    "clip": "Walk",
+    "source": "https://threejs.org/examples/webgl_animation_skinning_blending.html",
+    "download": "https://raw.githubusercontent.com/mrdoob/three.js/dev/examples/models/gltf/Soldier.glb",
+    "terms_source": "https://helpx.adobe.com/creative-cloud/faq/mixamo-faq.html",
+    "attribution": "Mixamo character and supplied clips \u00b7 official Three.js sample.",
+    "license_note": "Adobe/Mixamo reference asset; not claimed to be MIT, CC0, or original project artwork.",
+    "sha256": "dfb230fc1f942f259dd00281a1186953ad602fc5d69067ce63e24b2aa439736b",
+    "bytes": 2160468,
+    "meshes": 2,
+    "skin_joints": [
+      49,
+      2
+    ],
+    "unique_joint_nodes": 49,
+    "clips": [
+      {
+        "name": "Idle",
+        "channels": 156,
+        "duration_seconds": 1.9666666666666694
+      },
+      {
+        "name": "Run",
+        "channels": 156,
+        "duration_seconds": 0.7
+      },
+      {
+        "name": "TPose",
+        "channels": 156,
+        "duration_seconds": 0.03333333333333333
+      },
+      {
+        "name": "Walk",
+        "channels": 156,
+        "duration_seconds": 1.0333333333333332
+      }
+    ],
+    "modifications": "None to the asset bytes. Viewer centers display and plays supplied Walk by default.",
+    "front_yaw": 3.141592653589793
+  }
+}

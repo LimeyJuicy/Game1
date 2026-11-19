@@ -1,0 +1,30 @@
+{
+  "scope": "Actual reference rig; AT-003 legs-only prototype",
+  "tracks": [
+    "mixamorigHips.position",
+    "mixamorigHips.quaternion",
+    "mixamorigLeftUpLeg.quaternion",
+    "mixamorigLeftLeg.quaternion",
+    "mixamorigLeftFoot.quaternion",
+    "mixamorigLeftToeBase.quaternion",
+    "mixamorigRightUpLeg.quaternion",
+    "mixamorigRightLeg.quaternion",
+    "mixamorigRightFoot.quaternion",
+    "mixamorigRightToeBase.quaternion"
+  ],
+  "maximumReachErrorMeters": 1.1035141942621011e-7,
+  "strideSpeedMetersPerSecond": 0.739543851387688,
+  "supportAnkleWorldZ": [
+    -0.32916968142288716,
+    -0.3291602014173304,
+    -0.3291556202553373
+  ],
+  "version": 2,
+  "durationSeconds": 1.45,
+  "strideMeters": 1.0723385845121476,
+  "minimumSupportKneeBendDegrees": 7.179887724282016,
+  "extendedSupportFraction": 0.7363636363636363,
+  "supportDriftMeters": 0.000014061167549872522,
+  "upperJointRotationsUnchanged": true,
+  "note": "Measures bone targets/virtual sole contacts, not final mesh-ground clearance or artistic acceptance."
+}

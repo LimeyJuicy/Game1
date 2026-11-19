@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="data:," />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#151a1b" />
+    <title>The Courtyard — Defense Prototype</title>
+  </head>
+  <body>
+    <canvas id="game" tabindex="0" aria-label="Knight sword prototype. WASD to move, Shift to sprint, J for light attack, K for heavy attack, F to finish an eligible opponent, Escape to pause."></canvas>
+    <header class="heading"><span class="eyebrow">COMBAT FOUNDATION / 07</span><h1>The Courtyard</h1><p>Adaptive combat & dashing counters</p></header>
+    <div class="status" aria-live="polite"><i></i><span id="movement-status">Ready</span></div>
+    <aside class="training"><span class="eyebrow">PRACTICE</span><a class="study-link" href="/?study">Character & animation study ↗</a><label for="drill-count">Opponents</label><select id="drill-count"><option value="1">One · timing practice</option><option value="3">Three · group combat</option></select><label for="drill-pattern">Trainer attack</label><select id="drill-pattern"><option value="adaptive">Adaptive · varied combat</option><option value="sequence">Normal → heavy → red</option><option value="normal">Normal · white</option><option value="heavy">Heavy · white</option><option value="unblockable">Unblockable kick · red</option></select><label for="finisher-variant">Finisher preference · practice</label><select id="finisher-variant"><option value="auto">Automatic · fit and variety</option><option value="rising">Rising Cleave</option><option value="disarm">Disarm and Dispatch</option><option value="helmet">Helmet Bash and Throat Cut</option><option value="decapitation">Sweeping Decapitation</option><option value="sword-arm">Sword-Arm Sever</option></select><label for="drill-bearing">Approach</label><select id="drill-bearing"><option value="0">Front</option><option value="90">Right</option><option value="180">Behind</option><option value="270">Left</option></select><button id="drill-toggle">Start defense drill</button><p>White: block or parry. Red: evade.<br>K pressures guard. Punish openings to hurt the opponent.<br>Shift away to retreat. Successful dodges switch focus.<br>F finishes a nearby low-health opponent with broken defense.<br>Restart the drill to reset the fight.</p><p id="enemy-readout">Opponent inactive</p><span class="eyebrow">STRAW DUMMY</span><div class="health-track"><div id="dummy-health"></div></div><span id="dummy-readout">100 / 100 · 0 hits</span></aside>
+    <aside class="vitals"><span class="eyebrow">KNIGHT</span><div class="health-track"><div id="player-health"></div></div><div class="health-track"><div id="player-guard"></div></div><span id="player-readout">Health 100 · Guard 100</span></aside>
+    <div id="threats" aria-label="Attacks outside view"></div>
+    <div id="feedback" class="feedback" hidden></div>
+    <div id="riposte-hint" hidden>J · Riposte</div>
+    <div id="finisher-hint" hidden>F · Finish opponent</div>
+    <div class="enemy-defense"><span>OPPONENT DEFENSE</span><div class="health-track"><div id="enemy-guard"></div></div></div>
+    <footer><div><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd><span>Move</span></div><div><kbd>SHIFT</kbd><span>Sprint</span></div><div><kbd>J</kbd><kbd>K</kbd><span>Attack</span></div><div><kbd>E</kbd><span>Block / parry</span></div><div><kbd>SPACE</kbd><span>Dodge · twice to roll</span></div><div><kbd>ESC</kbd><span>Pause</span></div></footer>
+    <section id="overlay" class="overlay"><div class="panel"><span class="eyebrow">PERFECT DEFENSE PROTOTYPE</span><h2 id="overlay-title">Enter the courtyard</h2><p id="overlay-copy">Start the drill to practice blocks, dodges, and enemy guard pressure. K drains more defense; exposed enemies take damage. Very precise defense briefly slows the fight. After normal speed returns, press J to dash into a guaranteed defense-breaking counter. Red strikes require evasion.</p><button id="resume">Begin</button><small>During slow motion, inputs are discarded.</small></div></section>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

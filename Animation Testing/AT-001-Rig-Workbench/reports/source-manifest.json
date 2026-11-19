@@ -1,0 +1,21 @@
+{
+  "experiment": "AT-001",
+  "source": "Examplerig.blend",
+  "working_copy": "working/Examplerig-testing.blend",
+  "source_sha256": "ce4685323b42fc2f477eb65d18c296033de50d6e008af3c851426ac1ae7aeb60",
+  "working_sha256": "ce4685323b42fc2f477eb65d18c296033de50d6e008af3c851426ac1ae7aeb60",
+  "bytes": 845404,
+  "blend_header": "BLENDER_v276",
+  "header_version": "2.76",
+  "recorded_utc": "2026-11-19T01:01:06.702703+00:00",
+  "blender_available": false,
+  "export_available": false,
+  "inspection_status": "Pending Blender installation; header and copy verified only.",
+  "asset_provenance": "User supplied; source/reuse terms not yet recorded.",
+  "pointer_bits": 32,
+  "embedded_thumbnail": {
+    "width": 128,
+    "height": 128,
+    "note": "Saved-file thumbnail only; not a new render or verified rig preview."
+  }
+}

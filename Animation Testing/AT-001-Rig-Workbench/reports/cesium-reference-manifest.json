@@ -1,0 +1,17 @@
+{
+  "name": "Cesium Man \u00b7 walking reference",
+  "url": "/reference/CesiumMan.glb",
+  "source": "https://github.com/KhronosGroup/glTF-Sample-Assets/tree/main/Models/CesiumMan",
+  "download": "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Assets/main/Models/CesiumMan/glTF-Binary/CesiumMan.glb",
+  "license": "CC-BY-4.0",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/",
+  "attribution": "Cesium, 2017 \u00b7 CC BY 4.0. Unmodified reference model; supplied animation.",
+  "sha256": "b7001eaeea8254bd44773bcd247e78696d94169388fbb2a1800fc69434e777d9",
+  "bytes": 438044,
+  "skin_joints": 19,
+  "meshes": 1,
+  "clips": 1,
+  "animation_channels": 57,
+  "duration_seconds": 2,
+  "modifications": "None to the asset. Viewer centers the display and plays the supplied clip."
+}

@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="data:,"><title>Animation Testing · Rig Workbench</title></head>
+<body>
+  <aside>
+    <small>ANIMATION TESTING / AT-001</small>
+    <h1>Rig Workbench</h1>
+    <p>Inspect the rig, its skeleton, and exported animation clips.</p>
+    <section id="leg-panel" hidden><h2 id="study-title">Lower-body study</h2><p id="study-description">Inspect the pelvis and legs independently.</p><label id="carry-control" class="check" hidden><input id="sword-carry" type="checkbox" checked>Sword carry</label><div id="body-comparison" class="buttons"><button id="full-body">Full body</button><button id="legs-body">Legs & hips</button></div><p id="body-note" class="note">Compare at the same point in the stride.</p><label class="check"><input id="lower-only" type="checkbox" checked>Isolate lower body</label><label class="check"><input id="travel" type="checkbox" checked>Travel across ground</label><p id="leg-phase"></p><small id="support-note">Green rings mark procedural support targets.</small></section>
+    <section><h2 id="reference-name">Browser-ready reference rig</h2><p id="source-status">Reading workspace information…</p><a id="attribution" href="https://threejs.org/examples/webgl_animation_skinning_blending.html" target="_blank" rel="noopener noreferrer">Reference source and attribution</a><p id="status" role="status">Loading reference rig…</p></section>
+    <label>Reference rig<select id="reference"><option value="quaternius">Quaternius · authored locomotion</option><option value="soldier">Previous Mixamo / procedural study</option></select></label>
+    <label class="file">Load .glb or self-contained .gltf<input id="file" type="file" accept=".glb,.gltf"></label>
+    <label>Animation<select id="clip" disabled><option>Load a rig first</option></select></label>
+    <div class="buttons"><button id="play" disabled>Play</button><button id="restart" disabled>Restart</button></div>
+    <label>Time <output id="time">0.00s</output><input id="timeline" type="range" min="0" max="1" step="0.001" value="0" disabled></label>
+    <label>Playback speed<select id="speed"><option value="0.25">Quarter speed</option><option value="0.5">Half speed</option><option value="1" selected>Normal speed</option><option value="2">Double speed</option></select></label>
+    <label class="check"><input id="skeleton" type="checkbox">Show skeleton</label>
+    <label class="check"><input id="wireframe" type="checkbox">Show wireframe</label>
+    <div class="buttons views"><button data-view="front">Front</button><button data-view="side">Side</button><button data-view="back">Back</button><button data-view="three-quarter">¾ view</button><button data-view="upper">Upper body</button><button data-view="weapon">Sword side</button><button id="fit">Fit</button></div>
+    <pre id="stats">No rig loaded.</pre>
+    <p class="note">Drag to orbit · scroll to zoom · right-drag to pan.<br>Original scale retained; display origin centered. Inspection controls are separate from the game camera.</p>
+    <p class="note">No Blender installation needed for this reference. Imported clips are motion examples, not newly authored game animations. The main game remains unchanged.</p>
+  </aside>
+  <main><canvas id="view" aria-label="Rig inspection viewport"></canvas><span class="viewport-label">RIG INSPECTION · ORIGINAL SCALE</span></main>
+  <script type="module" src="/main.ts"></script>
+</body>
+</html>

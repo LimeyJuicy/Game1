@@ -1,0 +1,115 @@
+import * as THREE from 'three';
+
+export const LEG_STUDY = { duration: 1.2, stance: .6, samples: 160 };
+const wrap = (value: number) => ((value % 1) + 1) % 1;
+const ease = (value: number) => { const t = THREE.MathUtils.clamp(value, 0, 1); return t * t * (3 - 2 * t); };
+const lerp = THREE.MathUtils.lerp;
+function hermite(a: number, b: number, m: number, t: number) {
+  return (2 * t ** 3 - 3 * t ** 2 + 1) * a + (t ** 3 - 2 * t ** 2 + t) * m
+    + (-2 * t ** 3 + 3 * t ** 2) * b + (t ** 3 - t ** 2) * m;
+}
+export interface FootCalibration { height: number; toe: number; heel: number; stride: number; clearance: number }
+/** Forward is -Z. During stance a moving root cancels the backward local foot motion. */
+export function sampleFoot(phase: number, config: FootCalibration) {
+  const p = wrap(phase), stance = p < LEG_STUDY.stance;
+  const heelPitch = THREE.MathUtils.degToRad(12), pushPitch = THREE.MathUtils.degToRad(-25);
+  let pitch = 0;
+  if (p < .12) pitch = heelPitch * (1 - ease(p / .12));
+  else if (p < .6) pitch = pushPitch * ease((p - .43) / .17);
+  else {
+    const u = (p - .6) / .4;
+    pitch = u < .5 ? lerp(pushPitch, 0, ease(u / .5)) : lerp(0, heelPitch, ease((u - .5) / .5));
+  }
+  const pivot = p < .12 || p >= .8 ? config.heel : config.toe;
+  const pivotOffset = (angle: number, z: number) => z - (-config.height * Math.sin(angle) + z * Math.cos(angle));
+  const contactHeight = (angle: number, z: number) => config.height * Math.cos(angle) + z * Math.sin(angle);
+  let z: number, y: number;
+  if (stance) {
+    z = -config.stride * .3 + config.stride * p + pivotOffset(pitch, pivot);
+    y = contactHeight(pitch, pivot);
+  } else {
+    const u = (p - .6) / .4;
+    const start = config.stride * .3 + pivotOffset(pushPitch, config.toe);
+    const end = -config.stride * .3 + pivotOffset(heelPitch, config.heel);
+    z = hermite(start, end, config.stride * .4, u);
+    const floorHeight = Math.max(contactHeight(pitch, config.heel), contactHeight(pitch, config.toe));
+    y = floorHeight + Math.sin(Math.PI * u) ** 2 * config.clearance;
+  }
+  const phaseName = p < .04 ? 'Heel contact' : p < .12 ? 'Weight acceptance' : p < .38 ? 'Mid-support'
+    : p < .5 ? 'Heel rise' : p < .6 ? 'Push-off' : p < .8 ? 'Swing / clearance' : 'Reach / landing';
+  const toePitch = stance && p > .43 ? -pitch : p >= .6 && p < .76 ? -pushPitch * (1 - ease((p - .6) / .16)) : 0;
+  return { phase: p, phaseName, stance, pitch, toePitch, z, y, contactOffset: -config.height * Math.sin(pitch) + pivot * Math.cos(pitch) };
+}
+
+export function createLegStudy(root: THREE.Object3D) {
+  const find = (suffix: string) => {
+    let found: THREE.Object3D | null = null;
+    root.traverse(object => { if (object.name.replace(/[^a-z0-9]/gi, '').toLowerCase().endsWith(suffix.toLowerCase())) found = object; });
+    return found as THREE.Object3D | null;
+  };
+  const hips = find('Hips');
+  const sides = ['Left', 'Right'].map(side => ({ side, thigh: find(`${side}UpLeg`), shin: find(`${side}Leg`), foot: find(`${side}Foot`), toe: find(`${side}ToeBase`) }));
+  if (!hips || sides.some(leg => !leg.thigh || !leg.shin || !leg.foot || !leg.toe)) return null;
+  root.updateWorldMatrix(true, true);
+  const nodes: THREE.Object3D[] = []; root.traverse(object => nodes.push(object));
+  const baseline = nodes.map(node => ({ node, position: node.position.clone(), rotation: node.quaternion.clone(), scale: node.scale.clone() }));
+  const restore = () => { for (const pose of baseline) { pose.node.position.copy(pose.position); pose.node.quaternion.copy(pose.rotation); pose.node.scale.copy(pose.scale); } root.updateWorldMatrix(true, true); };
+  const hipOrigin = hips.getWorldPosition(new THREE.Vector3());
+  const legs = sides.map(leg => {
+    const thigh = leg.thigh!, shin = leg.shin!, foot = leg.foot!, toe = leg.toe!;
+    const thighWorld = thigh.getWorldPosition(new THREE.Vector3()), kneeWorld = shin.getWorldPosition(new THREE.Vector3());
+    const ankle = foot.getWorldPosition(new THREE.Vector3()), toeWorld = toe.getWorldPosition(new THREE.Vector3());
+    return { side: leg.side, thigh, shin, foot, toe, ankle, a: thighWorld.distanceTo(kneeWorld), b: kneeWorld.distanceTo(ankle),
+      footRotation: foot.getWorldQuaternion(new THREE.Quaternion()), toeRotation: toe.getWorldQuaternion(new THREE.Quaternion()), toeZ: toeWorld.z - ankle.z };
+  });
+  const length = (legs[0].a + legs[0].b + legs[1].a + legs[1].b) / 2;
+  const stride = length * 1.05, speed = stride / LEG_STUDY.duration;
+  const calibration = (index: number): FootCalibration => ({ height: legs[index].ankle.y, toe: legs[index].toeZ, heel: length * .065, stride, clearance: length * .12 });
+  const animated = [hips, ...legs.flatMap(leg => [leg.thigh, leg.shin, leg.foot, leg.toe])];
+  const times: number[] = [], positions: number[] = [], rotations = new Map(animated.slice(1).map(node => [node, [] as number[]]));
+  const axis = new THREE.Vector3(1, 0, 0);
+  function worldRotation(node: THREE.Object3D, desired: THREE.Quaternion) {
+    const parent = node.parent!.getWorldQuaternion(new THREE.Quaternion());
+    node.quaternion.copy(parent.invert().multiply(desired)); node.updateWorldMatrix(false, true);
+  }
+  function aim(node: THREE.Object3D, child: THREE.Object3D, target: THREE.Vector3) {
+    const origin = node.getWorldPosition(new THREE.Vector3());
+    const old = child.getWorldPosition(new THREE.Vector3()).sub(origin).normalize();
+    const next = target.clone().sub(origin).normalize();
+    worldRotation(node, new THREE.Quaternion().setFromUnitVectors(old, next).multiply(node.getWorldQuaternion(new THREE.Quaternion())));
+  }
+  let maximumReachError = 0;
+  for (let frame = 0; frame <= LEG_STUDY.samples; frame++) {
+    restore(); const phase = frame === LEG_STUDY.samples ? 0 : frame / LEG_STUDY.samples;
+    const pelvis = hipOrigin.clone();
+    pelvis.x -= Math.sin(phase * Math.PI * 2) * length * .014;
+    pelvis.y -= length * (.009 + .045 * Math.cos(phase * Math.PI * 2) ** 2);
+    hips.position.copy(hips.parent!.worldToLocal(pelvis)); root.updateWorldMatrix(true, true);
+    for (const [index, leg] of legs.entries()) {
+      const sample = sampleFoot(phase + index * .5, calibration(index));
+      const target = new THREE.Vector3(leg.ankle.x, sample.y, leg.ankle.z + sample.z);
+      const origin = leg.thigh.getWorldPosition(new THREE.Vector3());
+      const direction = target.clone().sub(origin), reach = direction.length(); direction.normalize();
+      const distance = THREE.MathUtils.clamp(reach, Math.abs(leg.a - leg.b) + .001, leg.a + leg.b - .001);
+      const forward = new THREE.Vector3(0, 0, -1).addScaledVector(direction, direction.z).normalize();
+      const along = (leg.a ** 2 + distance ** 2 - leg.b ** 2) / (2 * distance);
+      const bend = Math.sqrt(Math.max(0, leg.a ** 2 - along ** 2));
+      const knee = origin.clone().addScaledVector(direction, along).addScaledVector(forward, bend);
+      aim(leg.thigh, leg.shin, knee); aim(leg.shin, leg.foot, target);
+      worldRotation(leg.foot, new THREE.Quaternion().setFromAxisAngle(axis, sample.pitch).multiply(leg.footRotation));
+      worldRotation(leg.toe, new THREE.Quaternion().setFromAxisAngle(axis, sample.pitch + sample.toePitch).multiply(leg.toeRotation));
+      maximumReachError = Math.max(maximumReachError, leg.foot.getWorldPosition(new THREE.Vector3()).distanceTo(target));
+    }
+    times.push(frame / LEG_STUDY.samples * LEG_STUDY.duration); positions.push(...hips.position.toArray());
+    for (const [node, values] of rotations) values.push(...node.quaternion.toArray());
+  }
+  const tracks: THREE.KeyframeTrack[] = [new THREE.VectorKeyframeTrack(`${hips.name}.position`, times, positions)];
+  for (const [node, values] of rotations) tracks.push(new THREE.QuaternionKeyframeTrack(`${node.name}.quaternion`, times, values));
+  restore();
+  return {
+    clip: new THREE.AnimationClip('AT-003 · Legs-only foundation', LEG_STUDY.duration, tracks), speed, stride, maximumReachError,
+    waist: hipOrigin.y + length * .07, legHeight: hipOrigin.y,
+    sample(time: number) { return legs.map((leg, i) => ({ side: leg.side, ...sampleFoot(time / LEG_STUDY.duration + i * .5, calibration(i)), ankle: leg.foot.getWorldPosition(new THREE.Vector3()).toArray(), knee: leg.shin.getWorldPosition(new THREE.Vector3()).toArray(), hip: leg.thigh.getWorldPosition(new THREE.Vector3()).toArray() })); },
+    upperPose() { return baseline.filter(pose => !animated.includes(pose.node)).map(pose => ({ name: pose.node.name, rotation: pose.node.quaternion.toArray() })); },
+  };
+}

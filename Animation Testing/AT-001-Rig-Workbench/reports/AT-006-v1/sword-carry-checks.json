@@ -1,0 +1,29 @@
+{
+  "samples": [
+    {
+      "name": "Walk_Loop",
+      "minimumSampledTipHeight": 0.5868840563170553,
+      "maximumHandError": 3.766056832321986e-7,
+      "maximumReachAdjustment": 0.13515336486959037
+    },
+    {
+      "name": "Sprint_Loop",
+      "minimumSampledTipHeight": 0.4845668763151267,
+      "maximumHandError": 3.766056832321986e-7,
+      "maximumReachAdjustment": 0.13515336486959037
+    },
+    {
+      "name": "Jog_Fwd_Loop",
+      "minimumSampledTipHeight": 0.4286690477320677,
+      "maximumHandError": 3.766056832321986e-7,
+      "maximumReachAdjustment": 0.13515336486959037
+    },
+    {
+      "name": "Walk_Formal_Loop",
+      "minimumSampledTipHeight": 0.5975341992209321,
+      "maximumHandError": 3.766056832321986e-7,
+      "maximumReachAdjustment": 0.13515336486959037
+    }
+  ],
+  "scope": "Native reference rig, sampled flat-ground blade-tip clearance and untouched source-joint comparison. No continuous collision/armor clearance certification."
+}

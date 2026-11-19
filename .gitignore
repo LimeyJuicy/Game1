@@ -9,3 +9,11 @@ Thumbs.db
 
 # Logs
 *.log
+
+# Browser game build and dependencies
+node_modules/
+dist/
+.vite/
+artifacts/
+test-results/
+playwright-report/
