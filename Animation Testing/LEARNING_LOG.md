@@ -292,3 +292,7 @@ The guard interrupt is part of the controller: `guard()` drops the current move,
 - Slopes, turning while stepping, enemies, and gameplay balance at the slower engaged pace.
 
 **Integration implications.** The engine is shared by the bench and the game, so a guard tuned in the bench is the guard the flag uses. `advance` once per tick and a pure `pose()` mean the repeated posing in blade hit sampling cannot move the legs. Full adoption would need the user's decisions on engaged speed and on cancelling swings, plus an upper body that takes part.
+
+### 2026-11-19 — AT-007 branch and review location
+
+Correction to the entry above: the branch is now `footloose`, pushed to `andrewtheiss/Game1`, with a pull request open at https://github.com/LimeyJuicy/Game1/pull/1. Nothing else changed. Still not visually reviewed.

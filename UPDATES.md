@@ -400,3 +400,9 @@ All five browser scenarios passed after the palm-down clarification: revised car
 - Documentation: `Animation Testing/AT-007-FOOTWORK.md` with evidence stills, a learning-log entry, an animation README pointer and a `DEVELOPMENT.md` section.
 - Validation: 133 Node tests pass (97 existing, 36 new); 6 rig-bench leg tests pass; 38 game browser tests pass (35 existing, 3 new); 4 footwork-bench browser tests pass; game, rig-bench and footwork-bench TypeScript and production builds pass with the existing bundle-size advisory.
 - Limitations: no user visual review yet, and numeric checks are not visual acceptance. Step durations are estimates. The upper body only rides on the hips. Under the flag the three deviations above are undecided design, enemies do not use footwork, the turning cleave keeps the built-in legs, and nothing is balanced for the slower engaged pace.
+
+### 2026-11-19 — AT-007 branch renamed, pushed and proposed upstream
+
+- User asked for the work to go into a branch called `footloose`, be pushed, and be proposed to the original repository as a cross-fork pull request. The local branch `footwork-rig` was renamed to `footloose` (same commits) and pushed to the fork `andrewtheiss/Game1`. Opened https://github.com/LimeyJuicy/Game1/pull/1 from `andrewtheiss:footloose` into `main`.
+- This supersedes the earlier notes that the work was on `footwork-rig` and unpushed. Neither repository's `main` was changed. https://github.com/Harvard-Westlake/Game1 still does not resolve with the available credentials, so "the original" was taken to be the fork's parent, `LimeyJuicy/Game1`.
+- No code, gameplay, asset or test changes in this step; the validation recorded in the previous entry is the latest. Still outstanding: no user visual review of the footwork motion, and the three `?footwork` deviations remain undecided.
