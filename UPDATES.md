@@ -377,3 +377,8 @@ All five browser scenarios passed after the palm-down clarification: revised car
 
 - Created local main commit fffe7df containing the current project (153 files). Push remains pending because no remote is configured and destination URL has been requested.
 - Clarification of earlier whitespace check: the initial unstaged check passed; after staging previously untracked files, Git reported whitespace/CRLF notices in supplied third-party README/license text. Preserved those vendor files unchanged. No generated dependencies/build directories or matching secret patterns were included.
+
+### 2026-11-18 — Connect supplied GitHub repository
+
+- User supplied https://github.com/LimeyJuicy/Game1 and authorized pushing the committed project. Configured origin; read-only check found no remote refs.
+- HTTPS push could not prompt for credentials. Checked existing SSH agent identity and successfully verified read access to the same repository over SSH without changing authentication keys. Updated origin to git@github.com:LimeyJuicy/Game1.git for the push. No force push, history rewrite, gameplay changes or asset changes. Previous 97 tests and both builds remain the latest code validation.
