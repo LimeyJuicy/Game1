@@ -237,3 +237,58 @@ Open decisions for the user: guard travel speed (4.2 units/s would need about ni
 Proposed proof order: real knight legs in the bench with the three solver gaps closed; two saved guards; one advance and one retreat in both; side steps, chained steps at the capped speed and a wall-shortened step; lunge with forward recovery at full, half and zero travel; game hookup behind a flag. Each rung needs the user's visual sign-off; numeric checks only guard regressions.
 
 **Limits:** Geometry figures depend on the script's sample guard and the 0.15 ankle height. No visual review, no bench or game change, no assets added to the project, no dependency added. The next free experiment ID was AT-007 at the time of writing; it is not claimed by this entry.
+
+## 2026-11-19 — AT-007: fencing footwork built on the game knight
+
+Record: [AT-007-FOOTWORK.md](AT-007-FOOTWORK.md). Branch `footwork-rig`, local commits only.
+
+**Request.** Build the system from the 2026-11-19 research on a branch, in the proof order proposed there. A guard must interrupt any animation at any time and form very quickly from the current animation, stance and place. Provide a demo and some basic moves using the researched behaviours and speeds.
+
+**Built, in order.**
+
+1. Leg solver on the real knight (`src/footwork/legs.ts`): hips sink when a planted foot is out of reach, knee over the toes of its own foot, heel and ball pivots. The rig takes an optional lower-body override; without one nothing changes.
+2. Three guards as data (`src/footwork/stances.ts`): en garde, low, high. Lead/rear terms, so either foot can lead.
+3. Advance and retreat in each guard (`src/footwork/controller.ts`), scrubbable through exact snapshots.
+4. Side and diagonal steps, chained steps at the guard's own pace, wall-shortened steps, a passing step that swaps the lead.
+5. Lunge at any depth with the rear foot planted; forward and backward recovery.
+6. `?footwork` game flag (`src/footwork/game.ts`), player only, off by default.
+
+The guard interrupt is part of the controller: `guard()` drops the current move, the body stops within a few centimetres, each foot not already in place goes straight to the guard, and the hips spring to it. Default 0.14 s.
+
+**Tested results.**
+
+- Planted-foot movement is 0 in every move, guard and tick tested; no missed foot target; no leg above 99.9% extension.
+- En garde: 0.46 m advance in 0.40 s, 1.14 m/s chained. Low: 0.36 m in 0.52 s, 0.69 m/s. High: 0.50 m in 0.44 s, 1.13 m/s.
+- Full lunge: 0.42 m hip travel in 0.50 s, peak 1.99 m/s (research range 1.7 to 3.4). Low guard reaches 0.36 m because the rear leg runs out.
+- Guard interrupt from 11 moves × 45 ticks × 9 guard pairs: after 0.15 s both feet are down within 2 cm and the hips within 1 cm; the body moves under 10 cm after the key.
+- A step, a side step and a lunge end in the same place at 60 and 144 ticks per second.
+- 133 Node tests (97 existing unchanged), 6 rig-bench leg tests, 4 footwork-bench browser tests and 38 game browser tests (35 existing, 3 new) pass. Game, rig-bench and footwork-bench builds pass.
+- Without the flag: the footwork object is null and E still cannot cancel a committed swing (browser test).
+
+**Looked at, not accepted.** The assistant viewed stills of the guards, an advance, a lunge, a recovery, a pass, a side step, the wall stop and the guard interrupt, in the bench and in the flagged game. They show plausible fencing shapes. Stills do not show timing or weight. The user has not reviewed anything; this is not visual acceptance.
+
+**Problems met.**
+
+- Chained steps dipped in speed for one tick at each join when a step's length was not a whole number of ticks. Fixed by letting the rest of the tick go to the next move.
+- A step toward a wall landed the lead foot long and then corrected. Fixed by asking how far the body can get before the foot lands.
+- `moveWithCollision` advances in sub-steps of half the radius (30 cm at the bench's clearance), so it reported the last 16 cm before a wall as unreachable. The bench queries it 2 cm at a time. The function is unchanged.
+- First guard-interrupt measurement had the hips 2.4 cm off at the guard time because the hips were still swaying toward the support foot. The guard snap now skips the sway.
+- Interrupting a passing step dragged both feet back to the old lead (a joint moved up to 27 cm in one tick). The guard now leads with the nearer foot.
+- Releasing a held direction used to finish the current step and take one more. It now stops within the current step.
+
+**Choices the assistant made without asking.** These are the assistant's, not the user's, and each is easy to change.
+
+- Fixed-lead fencing steps are the default; the longsword passing step exists as a separate move.
+- The guard forms where the body is, rather than completing the step in progress.
+- Guard time 0.14 s. It is a slider in the bench.
+- In the game flag: en garde while engaged and the low guard while blocking; engaged pace follows the guard (about 1.15 instead of 4.2); E cancels an attack at any point except a riposte; hit tests keep the game's sword height while the drawn body rides on the hips.
+
+**Not tested or uncertain.**
+
+- Whether any of it looks right in motion.
+- Step durations: no cadence data was found; they are estimates.
+- Upper body: arms and sword only ride on the hips.
+- The high guard dips about 6 cm per step.
+- Slopes, turning while stepping, enemies, and gameplay balance at the slower engaged pace.
+
+**Integration implications.** The engine is shared by the bench and the game, so a guard tuned in the bench is the guard the flag uses. `advance` once per tick and a pure `pose()` mean the repeated posing in blade hit sampling cannot move the legs. Full adoption would need the user's decisions on engaged speed and on cancelling swings, plus an upper body that takes part.
