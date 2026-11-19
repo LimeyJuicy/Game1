@@ -5,6 +5,7 @@ import { Input } from './input.ts';
 import { movementVector, moveWithCollision, sprintAllowed, stepLocomotion, stepStrafe, faceTarget } from './movement.ts';
 import { createWorld } from './world.ts';
 import { createKnight } from './knight.ts';
+import { createPlayerFootwork } from './footwork/game.ts';
 import { FollowCamera } from './camera.ts';
 import { SwordActions, smooth, sweptBladeHits, lungeBudget } from './combat.ts';
 import { createDummy } from './dummy.ts';
@@ -61,6 +62,9 @@ function start() {
   obstacles.push(dummy.obstacle);
   const knight = createKnight(); scene.add(knight.root);
   knight.root.position.set(-3, 0, 5);
+  // Experimental, off by default: ?footwork lets the AT-007 footwork system drive the
+  // player's legs while engaged. Without the flag nothing below changes behaviour.
+  const footwork = new URLSearchParams(location.search).has('footwork') ? createPlayerFootwork(knight) : null;
   const camera = new THREE.PerspectiveCamera(55, 1, 0.1, 110);
   const input = new Input(canvas);
   const followCamera = new FollowCamera(camera, occluders);
@@ -150,6 +154,7 @@ function start() {
     opponents: opponents.map(({ id, fighter }) => ({ id, ...snapshot(fighter) })),
     attackTarget, riposteSource, retreating,
     dash: { active: dash.active, source: dash.source },
+    footwork: footwork?.debug ?? null,
     finisher: { active: finisher.active, source: finisher.plan?.id ?? null, variant: finisher.plan?.definition.id ?? null, elapsed: finisher.elapsed, duration: finisher.plan?.definition.duration ?? FINISHER.duration, phase: finisher.active ? finisher.phase : null, lethalApplied: finisher.lethalApplied, available: eligibleFinisher?.id ?? null, availableVariant: eligibleFinisher?.definition.id ?? null, events: executionEvents },
     debris: debris.snapshot,
     impact: { active: impact.active, remaining: impact.remaining, count: impact.count },
@@ -172,7 +177,7 @@ function start() {
     finisherCursor = 0;
     resetRevisionState(); defense.reset(); perfect.reset(); input.setLocked(false); dodgeOrigin = null; actions.cancel(true); pendingAttack = null;
     locomotion = { speed: 0, yaw: 0, turnVelocity: 0 }; actualSpeed = 0; focus = null; engaged = false; strafeVelocity = { x: 0, z: 0 };
-    knight.root.position.set(-3, 0, 5); knight.root.rotation.y = 0;
+    knight.root.position.set(-3, 0, 5); knight.root.rotation.y = 0; footwork?.release();
     configureOpponents(trainer.enabled);
     updateCamera(0, true);
   }
@@ -444,6 +449,8 @@ function start() {
       perfect.clearWindow();
       actions.cancel(); pendingAttack = null; locomotion.speed = 0; locomotion.turnVelocity = 0;
     }
+    // ?footwork only: the guard key interrupts a committed swing as well, so a guard can be taken at any time.
+    if (footwork && !riposteStarted && input.down('KeyE') && !defense.locked && !dash.active && actions.current && actions.current.kind !== 'riposte') { actions.cancel(true); pendingAttack = null; }
     if (!riposteStarted && (parry || input.down('KeyE')) && canDefend && !defense.locked) { actions.cancel(); pendingAttack = null; }
     defense.block(!riposteStarted && parry, input.down('KeyE'), !actions.current && !pendingAttack);
     const requested = riposteStarted || riposteRequested || dash.active ? null : heavy ? 'heavy' : light ? 'light' : null;
@@ -496,7 +503,8 @@ function start() {
       stride = attackLunge * (progress(actions.elapsed + dt) - progress(actions.elapsed));
     } else {
       if (!pendingAttack && focus) {
-        strafeVelocity = stepStrafe(strafeVelocity, move, defense.blocking ? 1.7 : 4.2, dt);
+        // ?footwork only: engaged pace is what the guard's own steps can cover, not the default 4.2.
+        strafeVelocity = stepStrafe(strafeVelocity, move, footwork ? footwork.pace(defense.blocking, move, locomotion.yaw) : defense.blocking ? 1.7 : 4.2, dt);
         locomotion.speed = Math.hypot(strafeVelocity.x, strafeVelocity.z);
         displacement = { x: strafeVelocity.x * dt, z: strafeVelocity.z * dt };
       } else if (!pendingAttack && retreating && retreatPivot) {
@@ -524,8 +532,20 @@ function start() {
     const face = targetPosition();
     if (face && !actions.current && !defense.locked) locomotion.yaw = faceTarget(locomotion.yaw, knight.root.position, face, dt);
     knight.root.rotation.y = locomotion.yaw;
-    knight.animate(distance, actualSpeed, gameTime, dt, { x: after.x - before.x, z: after.z - before.z }, engaged || dash.active || defense.blocking || defense.parryLeft > 0 || defense.locked);
+    const attack = actions.current;
+    const legs = footwork ? footwork.update(dt, {
+      x: after.x, z: after.z, yaw: locomotion.yaw,
+      drive: (!!focus || !!attack || defense.blocking) && !dash.active && !defense.locked && !retreating && attack?.style !== 'backspin',
+      blocking: defense.blocking || defense.parryLeft > 0,
+      attack: attack ? { serial: actions.serial, elapsed: actions.elapsed + dt, preparation: attack.preparation, swing: attack.swing, recovery: attack.recovery,
+        lunge: attackLunge, lungeLeft: attackLunge * (1 - smooth((actions.elapsed + dt - attack.preparation) / attack.swing)) } : null,
+    }) : 0;
+    // The built-in walk cycle fades out as the footwork legs take over.
+    knight.animate(distance, actualSpeed * (1 - legs), gameTime, dt, { x: after.x - before.x, z: after.z - before.z }, engaged || dash.active || defense.blocking || defense.parryLeft > 0 || defense.locked);
+    // Hits are tested with the game's own sword placement; the lowered hips only affect what is drawn.
+    footwork?.carry(false);
     if (actions.current) sampleSwordHit(actions.elapsed, actions.elapsed + dt);
+    footwork?.carry(true);
     knight.poseAttack(actions.current, actions.elapsed + (actions.current ? dt : 0), actions.serial);
     knight.poseDefense(defense, dt, actualSpeed > 0.1);
     const group = Number(drillCount.value) > 1;
@@ -615,6 +635,7 @@ function start() {
   }
 
   function simulateFinisher(dt: number) {
+    footwork?.release();
     const plan = finisher.plan!;
     const victim = fighterFor(plan.id);
     const result = finisher.advance(dt, !!victim?.alive, defense.health > 0);

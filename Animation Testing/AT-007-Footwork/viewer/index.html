@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="data:,"><title>Animation Testing · Footwork Bench</title><link rel="stylesheet" href="/style.css"></head>
+<body>
+  <aside>
+    <small>ANIMATION TESTING / AT-007</small>
+    <h1>Footwork Bench</h1>
+    <p>The game's own knight, with the footwork system driving hips and legs. Nothing here changes the game.</p>
+
+    <section>
+      <h2>Guards <span class="hint">interrupt anything</span></h2>
+      <div class="buttons" id="guards"></div>
+      <div class="buttons"><button data-act="KeyE"><kbd>E</kbd> Guard now</button><button data-act="KeyQ"><kbd>Q</kbd> Switch lead foot</button></div>
+      <p class="note">Press a guard key in the middle of any step or lunge. The move stops and the guard forms around where the body is.</p>
+    </section>
+
+    <section>
+      <h2>Steps <span class="hint">hold to keep stepping</span></h2>
+      <div class="pad">
+        <button data-hold="KeyW" class="up"><kbd>W</kbd> Advance</button>
+        <button data-hold="KeyA"><kbd>A</kbd> Left</button>
+        <button data-hold="KeyS"><kbd>S</kbd> Retreat</button>
+        <button data-hold="KeyD"><kbd>D</kbd> Right</button>
+      </div>
+      <div class="buttons"><button data-act="KeyT"><kbd>T</kbd> Pass forward</button><button data-act="KeyG"><kbd>G</kbd> Pass back</button></div>
+      <div class="buttons"><button data-hold="ArrowLeft"><kbd>←</kbd> Turn</button><button data-hold="ArrowRight"><kbd>→</kbd> Turn</button></div>
+    </section>
+
+    <section>
+      <h2>Lunge</h2>
+      <div class="buttons"><button data-act="Space"><kbd>Space</kbd> Full</button><button data-act="KeyH"><kbd>H</kbd> Half</button><button data-act="KeyJ"><kbd>J</kbd> Thrust step</button></div>
+      <div class="buttons"><button data-act="KeyR"><kbd>R</kbd> Recover forward</button><button data-act="KeyF"><kbd>F</kbd> Recover back</button></div>
+    </section>
+
+    <section>
+      <h2>Proof runs</h2>
+      <label>Scripted sequence<select id="script"></select></label>
+      <div class="buttons"><button id="run-script">Play sequence</button><button data-act="KeyX"><kbd>X</kbd> Reset</button></div>
+    </section>
+
+    <section>
+      <h2>View</h2>
+      <div class="buttons views"><button data-view="side">Side</button><button data-view="front">Front</button><button data-view="back">Back</button><button data-view="top">Top</button><button data-view="quarter">¾</button></div>
+      <label class="check"><input id="follow" type="checkbox" checked>Camera follows</label>
+      <label class="check"><input id="legs-only" type="checkbox">Legs and hips only</label>
+      <label class="check"><input id="skeleton" type="checkbox">Skeleton</label>
+      <label class="check"><input id="markers" type="checkbox" checked>Heel and ball contacts, guard footprints</label>
+      <label class="check"><input id="prints" type="checkbox" checked>Footprints where each foot landed</label>
+      <label class="check"><input id="paths" type="checkbox" checked>Ankle paths</label>
+      <label class="check"><input id="wall" type="checkbox" checked>Wall ahead</label>
+    </section>
+    <p class="note">Drag to orbit · scroll to zoom · right-drag to pan.<br>Tune values in the panel on the right; “Copy guard as JSON” gives text to paste into <code>src/footwork/stances.ts</code>.</p>
+  </aside>
+  <main>
+    <canvas id="view" aria-label="Footwork viewport"></canvas>
+    <pre id="hud" aria-live="off"></pre>
+    <div id="tuning"></div>
+    <div id="transport">
+      <button id="pause" title="Pause (P)">Pause</button>
+      <button id="back" title="Back one tick (,)">◀</button>
+      <button id="forward" title="Forward one tick (.)">▶</button>
+      <input id="timeline" type="range" min="0" max="0" step="1" value="0" aria-label="Timeline">
+      <output id="clock">0.00 s</output>
+      <label>Speed<select id="speed"><option value="1">1×</option><option value="0.5">½×</option><option value="0.25">¼×</option><option value="0.1">⅒×</option></select></label>
+    </div>
+  </main>
+  <script type="module" src="/main.ts"></script>
+</body>
+</html>

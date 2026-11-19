@@ -14,7 +14,9 @@ The main game's current mechanics remain the baseline. Work here does not automa
 
 ## Existing reference material
 
-Current experiment: [AT-006 — Low sword carry](AT-006-SWORD-CARRY.md). The showcase defaults to Quaternius walking with a derived one-handed carry and a Sword side camera. Sword carry toggles the adaptation at the same stride time; original motion and legs-only comparison remain available. [AT-005](AT-005-FULL-BODY.md) records whole-body source coordination and [AT-004](AT-004-QUATERNIUS.md) records the library inventory. Walking, formal walking, jogging and sprinting are available. Sprint enter/exit remain absent. No main-game integration.
+Current experiment: [AT-007 — Fencing footwork on the game knight](AT-007-FOOTWORK.md). Run `npm run footwork:dev` for a bench where the game's own knight takes three guards, steps, lunges and recovers with planted feet, and where a guard key interrupts anything. Ready for review; not visually accepted. The game can load it for the player with `?footwork`, off by default.
+
+Earlier: [AT-006 — Low sword carry](AT-006-SWORD-CARRY.md) (rejected). The showcase defaults to Quaternius walking with a derived one-handed carry and a Sword side camera. Sword carry toggles the adaptation at the same stride time; original motion and legs-only comparison remain available. [AT-005](AT-005-FULL-BODY.md) records whole-body source coordination and [AT-004](AT-004-QUATERNIUS.md) records the library inventory. Walking, formal walking, jogging and sprinting are available. Sprint enter/exit remain absent. No main-game integration.
 
 Active showcase: [Rig workbench](AT-001-Rig-Workbench/README.md). The Reference rig selector retains the prior Mixamo/AT-003 procedural experiment for comparison. AT-003 v2 was rejected by user review as creeping; passing its numerical checks did not establish visual quality. AT-001 preserves the original .blend workspace as an archive.
 

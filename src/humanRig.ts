@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import type { SeverPart } from './debris.ts';
+import type { LowerBodyOverride } from './footwork/legs.ts';
 
 export interface RigControls {
   body: THREE.Object3D;
@@ -251,7 +252,9 @@ export function createHumanRig(parent: THREE.Group, controls: RigControls) {
       for (const cap of caps) { cap.removeFromParent(); cap.geometry.dispose(); (cap.material as THREE.Material).dispose(); }
       caps.length = 0;
     },
-    update(grip = 1, gait = 0, phase = 0) {
+    /** `lower` lets the footwork system drive the pelvis and legs; without it the rig's own leg solve is unchanged. */
+    update(grip = 1, gait = 0, phase = 0, lower?: LowerBodyOverride | null) {
+      const drive = lower && lower.weight > 0 ? lower : null;
       const pose = controls.body;
       pelvis.position.set(pose.position.x * 0.7, 0.94 + pose.position.y * 0.75, pose.position.z * 0.5);
       pelvis.rotation.set(pose.rotation.x * 0.2,pose.rotation.y * 0.4,pose.rotation.z * 0.4);
@@ -259,6 +262,12 @@ export function createHumanRig(parent: THREE.Group, controls: RigControls) {
       ribs.rotation.set(pose.rotation.x * 0.3,pose.rotation.y * 0.2,pose.rotation.z * 0.2);
       chest.rotation.set(pose.rotation.x * 0.25,pose.rotation.y * 0.15,pose.rotation.z * 0.15);
       head.rotation.set(-0.035,-pose.rotation.y * 0.15,0);
+      if (drive) {
+        pelvis.position.lerp(drive.pelvisPosition, drive.weight); pelvis.quaternion.slerp(drive.pelvisQuaternion, drive.weight);
+        // The hips turn with the stance; hand part of that turn back through the spine and head.
+        spine.rotation.y += drive.spineYaw * 0.4 * drive.weight; ribs.rotation.y += drive.spineYaw * 0.35 * drive.weight;
+        chest.rotation.y += drive.spineYaw * 0.25 * drive.weight; head.rotation.y += drive.headYaw * drive.weight;
+      }
       container.updateWorldMatrix(true,true);
       for (const [index, limb] of limbs.entries()) {
         const target = localPoint(controls.feet[index], new THREE.Vector3());
@@ -266,6 +275,11 @@ export function createHumanRig(parent: THREE.Group, controls: RigControls) {
         const footRotation = controls.feet[index].getWorldQuaternion(new THREE.Quaternion());
         const kneeRotation = limb.knee.getWorldQuaternion(new THREE.Quaternion()); limb.ankle.quaternion.copy(kneeRotation.invert().multiply(footRotation));
         limb.toe.rotation.x = Math.max(0,Math.sin(phase + index*Math.PI)) * gait * 0.12;
+        if (drive) {
+          const leg = drive.legs[index];
+          limb.hip.quaternion.slerp(leg.thigh, drive.weight); limb.knee.quaternion.slerp(leg.shin, drive.weight); limb.ankle.quaternion.slerp(leg.foot, drive.weight);
+          limb.toe.rotation.x += (leg.toe - limb.toe.rotation.x) * drive.weight;
+        }
         container.updateWorldMatrix(true,true);
         const handTarget = localPoint(controls.sword,new THREE.Vector3(0,limb.side < 0 ? -0.16 : 0.02,0));
         if (limb.side < 0 && grip < 1) {
