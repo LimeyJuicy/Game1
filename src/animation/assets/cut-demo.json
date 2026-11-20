@@ -1,0 +1,15 @@
+{
+  "id": "downloaded-diagonal-cut",
+  "source": "sword_light_a",
+  "preparation": 0.5,
+  "cut": 0.367,
+  "recovery": 0.65,
+  "settle": 0.3,
+  "stepStart": 0.32,
+  "stepDuration": 0.5,
+  "stepDepth": 0.35,
+  "recoverAt": 0.95,
+  "hipTwistWeight": 0.6,
+  "hipTwistLimit": 16,
+  "hipLeanLimit": 2
+}

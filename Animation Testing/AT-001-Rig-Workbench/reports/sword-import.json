@@ -1,0 +1,79 @@
+{
+  "sourceFiles": {
+    "Sword.obj": "34f0c85e8895faf3bdf9375109038a11ed2439672c610f02ce3ed4527ed8408d",
+    "Sword.mtl": "bb1a3616f4db4a65442852c75198c313c509591b0ff0d521924b96823d5f0a82",
+    "Textures/PBR Metallic Roughness/Sword_BaseColor.png": "267abfa87fc6722bb82fc711b8803d704fd639567b58ec7d29880fe4ec377588",
+    "Textures/PBR Metallic Roughness/Sword_Height.png": "44a3d2ea4048380c4ccfacacf0ecd2605dc67c7d0f810fc20087d4461fbba89a",
+    "Textures/PBR Metallic Roughness/Sword_Metallic.png": "d9da523fbb4189fee7a957ce2db2091ec9646fa1e62decfc61333586e5617f6c",
+    "Textures/PBR Metallic Roughness/Sword_Normal.png": "ce3cb21f7d25928b3f3c8fc747951fef17a743bd82bd0d149e309acc0e2f2a1e",
+    "Textures/PBR Metallic Roughness/Sword_Roughness.png": "7b98c52c9ef1aa588de3dc4841d13c4b0cff587b4f7fc1874df78b48ecff8c60"
+  },
+  "output": "Animation Testing/AT-001-Rig-Workbench/viewer/public/models/player-sword.glb",
+  "outputBytes": 10908440,
+  "outputSha256": "554c5886b6bbd5cba065f37e102cef01353c5005b13c2b6405d4833a91a0e254",
+  "parts": [
+    {
+      "name": "Wrap_ND_\u2014_Geo_Lift.024",
+      "vertices": 54,
+      "triangles": 50
+    },
+    {
+      "name": "Pommel_Circle.003",
+      "vertices": 416,
+      "triangles": 510
+    },
+    {
+      "name": "Ring_ND_\u2014_Recon_Poly.042",
+      "vertices": 420,
+      "triangles": 456
+    },
+    {
+      "name": "RingWrap_ND_\u2014_Geo_Lift.068",
+      "vertices": 172,
+      "triangles": 160
+    },
+    {
+      "name": "GuardsEnd_ND_\u2014_Geo_Lift.069",
+      "vertices": 274,
+      "triangles": 372
+    },
+    {
+      "name": "PommelFirst_Circle.004",
+      "vertices": 816,
+      "triangles": 1088
+    },
+    {
+      "name": "Blade_Plane.040",
+      "vertices": 824,
+      "triangles": 1184
+    },
+    {
+      "name": "Guards_Plane.041",
+      "vertices": 649,
+      "triangles": 868
+    }
+  ],
+  "triangles": 4688,
+  "originalPositionCount": 2461,
+  "bounds": [
+    [
+      -0.143882,
+      0.144052
+    ],
+    [
+      -0.319719,
+      1.478455
+    ],
+    [
+      -0.034203,
+      0.034086
+    ]
+  ],
+  "textureSize": 2048,
+  "notes": [
+    "Original files unchanged; supplied PBR maps replace broken absolute Windows MTL paths.",
+    "2048px derived textures. Base color in sRGB; metallic/roughness in B/G channels; tangent normal assumed OpenGL from PBR set. No height displacement.",
+    "UV V inverted for glTF texture origin. Original geometry, object groups and normals retained. No skin needed for rigid hand attachment.",
+    "Grip origin near supplied handle; physical scale/hand fit not validated. User-supplied asset; no independent licensing claim."
+  ]
+}

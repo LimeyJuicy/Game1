@@ -1,0 +1,10 @@
+import{test,expect}from'@playwright/test';import{fileURLToPath}from'node:url';
+test('single-handed downloaded cut blends with planted stance and PR attack step',async({page})=>{
+ const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));await page.goto('/?cut');await page.waitForFunction(()=>(window as any).__cutDemo?.state.bones===66||document.querySelector('[role=status]')?.textContent?.startsWith('Could not'),null,{timeout:60000});expect(errors).toEqual([]);await expect(page.locator('#status')).toContainText('Ready');
+ const state=()=>page.evaluate(()=>(window as any).__cutDemo.state);
+ expect((await state()).singleHand).toBe(true);expect((await state()).swordLength).toBeCloseTo(1.10048,3);await expect(page.locator('#status')).toContainText('Ready');
+ for(const[time,name]of [[0,'guard'],[.53,'prepare'],[.69,'cut'],[.86,'follow']] as [number,string][]){await page.evaluate(t=>(window as any).__cutDemo.seek(t),time);await page.screenshot({path:fileURLToPath(new URL(`../evidence/imported/cut-${name}.png`,import.meta.url))});expect((await state()).gripErrors.right).toBeLessThan(.00001);}
+ await page.selectOption('#cut-mode','step');await page.evaluate(()=>(window as any).__cutDemo.seek(.69));expect((await state()).root.z).toBeLessThan(-.08);await page.locator('[data-view=side]').click();await page.screenshot({path:fileURLToPath(new URL('../evidence/imported/cut-step-side.png',import.meta.url))});
+ await page.locator('#cut-reset').click();await page.locator('#cut-play').click();await page.waitForFunction(()=>(window as any).__cutDemo.state.time>.1);await page.getByRole('button',{name:'Pause',exact:true}).click();const stopped=(await state()).time;await page.waitForTimeout(200);expect((await state()).time).toBe(stopped);
+ await page.locator('#cut-time').fill('0.8');await expect.poll(async()=>(await state()).time).toBe(.8);await page.locator('#cut-trail').check();await page.locator('#cut-skeleton').check();await page.waitForTimeout(100);expect(errors).toEqual([]);
+});

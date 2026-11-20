@@ -31,7 +31,7 @@ function fixture() {
 test('reference humanoid loads and animates without Blender; manual rig controls still work', async ({ page }) => {
   const errors: string[] = []; page.on('pageerror', error => errors.push(error.message));
   page.on('console', message => { if (message.type() === 'error') errors.push(message.text()); });
-  await page.goto('/?reference=soldier');
+  await page.goto('/?mode=animation&reference=soldier');
   await expect(page.getByRole('heading', { name: 'Rig Workbench' })).toBeVisible();
   await expect(page.locator('#source-status')).toContainText('Mixamo');
   await expect(page.locator('#stats')).toContainText('4 clips');

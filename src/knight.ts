@@ -7,13 +7,18 @@ import { snapshotWeapon } from './debris.ts';
 import type { SeverPart } from './debris.ts';
 import { FINISHERS } from './finisher.ts';
 import type { FinisherDefinition } from './finisher.ts';
+import type { LowerBodyOverride } from './footwork/legs.ts';
 
 /** Articulated, skinned character-quality sample with gameplay-aligned controls. */
 export function createKnight() {
   const root = new THREE.Group();
   const visual = new THREE.Group(); visual.position.y = 0.9; root.add(visual);
   const skeleton = new THREE.Group(); skeleton.position.y = -0.9; visual.add(skeleton);
-  const body = new THREE.Group(); skeleton.add(body);
+  // The carrier is identity unless the footwork system lowers the hips; it then moves the
+  // upper-body controls and sword with them.
+  const carrier = new THREE.Group(); skeleton.add(carrier);
+  const body = new THREE.Group(); carrier.add(body);
+  let lowerBody: LowerBodyOverride | null = null;
   const steel = new THREE.MeshToonMaterial({ color: '#c3cdca' });
   const leather = new THREE.MeshToonMaterial({ color: '#40322c' });
   function weaponPiece(geometry: THREE.BufferGeometry, material: THREE.Material, position: THREE.Vector3) {
@@ -144,7 +149,7 @@ export function createKnight() {
     else if (preparation < 1) blendPose(entryPose, capturePose(), preparation);
     else if (recover > 0) blendPose(capturePose(), idlePose, recover);
     root.updateWorldMatrix(true, true);
-    rig.update(grip, attacking ? 0 : gait, motionPhase);
+    rig.update(grip, attacking ? 0 : gait, motionPhase, lowerBody);
   }
   poseAttack(null, 0, 0);
 
@@ -153,6 +158,9 @@ export function createKnight() {
     root,
     poseAttack,
     rig,
+    carrier,
+    /** Hand the pelvis and legs to the footwork system (null restores the built-in legs). */
+    setLowerBody(value: LowerBodyOverride | null) { lowerBody = value; },
     get capabilities() { return { helmet: rig.hasPart('head'), head: rig.hasPart('head'), swordArm: rig.hasPart('sword-arm'), weapon: sword.visible }; },
     dropWeapon() { return snapshotWeapon(sword); },
     detach(part: SeverPart) {
@@ -208,7 +216,7 @@ export function createKnight() {
         }
       }
       if (elapsed < 0.28) blendPose(entryPose, capturePose(), smooth(elapsed / 0.28));
-      root.updateWorldMatrix(true, true); rig.update(grip, 0, motionPhase);
+      root.updateWorldMatrix(true, true); rig.update(grip, 0, motionPhase, lowerBody);
     },
     poseKick(timing: { preparation: number; swing: number; recovery: number }, elapsed: number, serial: number) {
       if (serial !== lastSerial) { entryPose = capturePose(); lastSerial = serial; }
@@ -231,7 +239,7 @@ export function createKnight() {
       if (load < 1) blendPose(entryPose, capturePose(), load);
       else if (recovery > 0) blendPose(capturePose(), idlePose, recovery);
       root.updateWorldMatrix(true, true);
-      rig.update(grip, attacking ? 0 : gait, motionPhase);
+      rig.update(grip, attacking ? 0 : gait, motionPhase, lowerBody);
     },
     kickContact(): BladeSegment {
       return { base: legs[1].foot.localToWorld(new THREE.Vector3(0, -0.075, 0.08)), tip: legs[1].foot.localToWorld(new THREE.Vector3(0, -0.075, -0.26)) };
@@ -276,7 +284,7 @@ export function createKnight() {
       visual.quaternion.setFromAxisAngle(axis, spinAngle).multiply(new THREE.Quaternion().slerp(defensiveRotation, defenseBlend));
       visual.position.y = THREE.MathUtils.lerp(0.9, defensiveHeight, defenseBlend);
       root.updateWorldMatrix(true, true);
-      rig.update(grip, attacking ? 0 : gait, motionPhase);
+      rig.update(grip, attacking ? 0 : gait, motionPhase, lowerBody);
     },
     blade(): BladeSegment {
       return { base: sword.localToWorld(new THREE.Vector3(0, 0.16, 0)), tip: sword.localToWorld(new THREE.Vector3(0, 1.46, 0)) };

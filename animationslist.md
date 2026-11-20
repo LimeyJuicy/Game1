@@ -1,5 +1,7 @@
 # Animation list
 
+**Current weapon decision — 2026-11-19, AT-017 revision:** use the resized sword single-handed in the right hand; the left arm is free. The review profile uses scale 0.34 (about 1.10 m on the knight). This supersedes the earlier two-handed shoulder carry. Two-hand-specific directions below describe earlier studies, not current requirements. Single-handed travel poses and final animation polish still need review.
+
 **Latest scheduling decision — 2026-11-18:** core gameplay/combat mechanics first using existing practice/debug UI, test arena, and placeholder motion. Waves/rewards, weather, final UI, maps, and balance are deferred until after core mechanics and before final animation production/polish. Earlier conflicting sequencing is superseded by [CODING_PLAN.md](CODING_PLAN.md#updated-production-order--2026-11-18). Existing motion remains visually unaccepted; preserve its quality requirements for the final phase. This documentation update does not itself resume coding.
 
 Player body-mechanics reference: [PLAYER_MOVEMENT_SPEC.md](PLAYER_MOVEMENT_SPEC.md). Use its action-by-action choreography, directional coverage, transition matrix, and review checks while authoring/programming player animation. The current player sample has not passed visual acceptance; animation production is deferred; core-mechanics work later resumed with explicit authorization on 2026-11-18.
@@ -45,7 +47,7 @@ These are core production requirements. Recommended production order: prove the 
 | Check | ID | Instance | Delivery / coverage |
 | --- | --- | --- | --- |
 | [ ] | LOC-01 | Relaxed but alert standing outside combat | Clip loop; restrained breathing and weight shifts |
-| [ ] | LOC-02 | Standing in combat ready guard | Clip loop; two-handed sword, alert footwork |
+| [ ] | LOC-02 | Standing in combat ready guard | Clip loop; single-handed sword, alert footwork |
 | [ ] | LOC-03 | Walk forward outside combat | Clip loop |
 | [ ] | LOC-04 | Faster running between walk and full sprint | Clip or speed blend, only if a distinct gait is needed |
 | [ ] | LOC-05 | Full sprint | Clip loop; grounded stride and armor weight |
@@ -70,7 +72,7 @@ These are core production requirements. Recommended production order: prove the 
 | [ ] | LOC-24 | Adjust foot placement on supported slopes/uneven ground | Procedural; conditional on final arena surfaces |
 | [ ] | LOC-25 | Left/right foot support variants for starts and stops | Phase matching or authored alternatives as needed |
 
-**Confirmed carry direction:** one-handed sword carry beside the body while walking/running/sprinting, blade point outward and backward and clear of the ground. Sword arm bends and visibly swings; the wrist/forearm carry the blade without changing the closed grip. During walking and sprinting the back of the hand faces sky, palm down. Free arm and torso keep their coordinated source motion. Combat retains a two-handed guard, with release/regrip transitions still requiring authoring. No over-the-shoulder locomotion carry is required. Native-rig showcase AT-006 tests this direction; final game animation remains separate.
+**Confirmed carry direction:** one-handed sword carry beside the body while walking/running/sprinting, blade point outward and backward and clear of the ground. Sword arm bends and visibly swings; the wrist/forearm carry the blade without changing the closed grip. During walking and sprinting the back of the hand faces sky, palm down. Free arm and torso keep their coordinated source motion. Combat also uses a single-handed guard; pose and carry transitions still require review. No over-the-shoulder locomotion carry is required. Native-rig showcase AT-006 tests this direction; final game animation remains separate.
 
 **Retreat discussion:** running away must work. Shift plus movement away to disengage was proposed, along with pursuers being slightly slower than the player's sprint. Exact activation, re-engagement, and interruption rules still need agreement; LOC-21/22 reserve the visual transitions without claiming those controls are implemented.
 
@@ -149,7 +151,7 @@ These are animation connections, not new attacks or permission to move during co
 | Check | ID | Instance | Delivery / coverage |
 | --- | --- | --- | --- |
 | [ ] | DEF-01 | Raise sword into held guard | Clip/blend from idle, carry, or allowed recovery |
-| [ ] | DEF-02 | Hold stationary guard | Clip loop; balanced two-handed stance |
+| [ ] | DEF-02 | Hold stationary guard | Clip loop; balanced single-handed stance |
 | [ ] | DEF-03 | Lower guard | Blend back to combat ready or low carry |
 | [ ] | DEF-04 | Guard while advancing, retreating, or strafing | Upper/lower-body layers with planted feet |
 | [ ] | DEF-05 | Intercept normal attacks | High/low, left/right, frontal/diagonal contact coverage |
@@ -708,3 +710,7 @@ After explicit authorization to resume the mechanics slice, one Rising Cleave ex
 ### All-five finisher mechanics and detachable parts — 2026-11-18
 
 The authorized mechanics follow-up adds safe/compatible selection among all five executions; per-sequence event timelines; checked surround/outside-step paths; sword release; actual posed head/arm extraction; capped separation; bounded prop motion/lifetime/count/disposal; and full character restoration on reset. A practice preference selector supports inspection while retaining eligibility/space checks. Production animation checkboxes remain unchecked: these are temporary poses, not final clips, blood effects, or final sever-site/armor cleanup. See GAME_DESIGN.md, DEVELOPMENT.md and CORE_COMBAT_AUDIT.md.
+
+## AT-018 — Current source-adaptation coverage (2026-11-19)
+
+The existing workbench at `/?animations` now previews 69 single-handed adaptations on the imported knight, including six light/three heavy source cuts, recoveries, block/parry, eight-way combat/guarded movement/evasion, directional turn-and-roll adaptations, gait/entry/exit studies, reactions, death/get-up, enemy kick/taunt and victory salute. See [AT-018 guide](Animation%20Testing/AT-018-Animation-Library/README.md) and [source/role coverage](Animation%20Testing/AT-018-Animation-Library/COVERAGE.md). These are review candidates; production checkboxes above remain open. Reused clips/directional adaptations do not satisfy the distinct 24-light/six-heavy chart. Paired finishers, missing paths, target-relative interception, physical contact/live transitions, carry and skin/cloth polish remain explicit custom work. No combat rules are changed by the library.

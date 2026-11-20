@@ -1,6 +1,8 @@
 import * as THREE from 'three';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
+import { buildKnightModel } from './knightModelGeometry.ts';
 import type { SeverPart } from './debris.ts';
+import type { LowerBodyOverride } from './footwork/legs.ts';
 
 export interface RigControls {
   body: THREE.Object3D;
@@ -9,7 +11,7 @@ export interface RigControls {
 }
 
 /** Native skinned sample: human proportions, independently driven joints, fitted plate. */
-export function createHumanRig(parent: THREE.Group, controls: RigControls) {
+export function createHumanRig(parent: THREE.Group, controls: RigControls, options: { modelReview?: boolean } = {}) {
   const container = new THREE.Group(); container.name = 'Human armored character'; parent.add(container);
   const bones: THREE.Bone[] = [];
   function joint(name: string, owner: THREE.Object3D, x = 0, y = 0, z = 0) {
@@ -23,8 +25,8 @@ export function createHumanRig(parent: THREE.Group, controls: RigControls) {
   const neck = joint('Neck', chest, 0, 0.23);
   const head = joint('Head', neck, 0, 0.09);
   const limbs = [-1, 1].map(side => {
-    const clavicle = joint(`${side} Clavicle`, chest, side * 0.12, 0.1);
-    const shoulder = joint(`${side} Shoulder`, clavicle, side * 0.14);
+    const clavicle = joint(`${side} Clavicle`, chest, side * (options.modelReview ? .10 : .12), 0.1);
+    const shoulder = joint(`${side} Shoulder`, clavicle, side * (options.modelReview ? .125 : .14));
     const elbow = joint(`${side} Elbow`, shoulder, 0, -0.335);
     const forearmTwist = joint(`${side} Forearm twist`, elbow);
     const wrist = joint(`${side} Wrist`, forearmTwist, 0, -0.315);
@@ -36,7 +38,9 @@ export function createHumanRig(parent: THREE.Group, controls: RigControls) {
     return { side, clavicle, shoulder, elbow, forearmTwist, wrist, hand, hip, knee, ankle, toe };
   });
   const parts = new Map<string, THREE.BufferGeometry[]>();
+  const modelReview = options.modelReview === true;
   const colors: Record<string, string> = { steel: '#95a6a8', edge: '#bdc9c7', mail: '#58646a', cloth: '#912f3b', leather: '#493a30', dark: '#121c23' };
+  if (modelReview) Object.assign(colors, { steel: '#bcc4c9', edge: '#e0e4e8', mail: '#626e77', cloth: '#8e2531', leather: '#403127', dark: '#0b1016', trim: '#b5a185' });
   const palette = new Uint8Array([80, 151, 214, 255]);
   const gradient = new THREE.DataTexture(palette, 4, 1, THREE.RedFormat); gradient.needsUpdate = true; gradient.minFilter = gradient.magFilter = THREE.NearestFilter;
   function add(geometry: THREE.BufferGeometry, bone: THREE.Bone, material: string, blendBone?: THREE.Bone, blend?: (point: THREE.Vector3) => number) {
@@ -84,6 +88,8 @@ export function createHumanRig(parent: THREE.Group, controls: RigControls) {
     }
     const geometry = new THREE.BufferGeometry(); geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3)); geometry.setAttribute('uv', new THREE.Float32BufferAttribute(uv, 2)); geometry.setIndex(indices); geometry.computeVertexNormals(); add(geometry, bone, material);
   }
+  if(modelReview) buildKnightModel({ bones, add, joint });
+  else {
   // A fitted torso with independent lumbar/chest deformation and overlapping plates.
   ellipsoid(pelvis, 'mail', 0, 0.035, 0, 0.19, 0.16, 0.125);
   shell(spine, 'mail', [[-0.08, 0.17, 0.11, 0], [0.1, 0.19, 0.12, 0], [0.27, 0.235, 0.14, 0], [0.36, 0.19, 0.115, 0]]);
@@ -147,6 +153,7 @@ export function createHumanRig(parent: THREE.Group, controls: RigControls) {
   const outline = [[0,.076],[.018,.09],[.024,.06],[.065,.1],[.155,.135],[.13,.035],[.095,.055],[.07,.005],[.046,.03],[.025,-.035],[.044,-.065],[.017,-.05],[0,-.075],[-.017,-.05],[-.044,-.065],[-.025,-.035],[-.046,.03],[-.07,.005],[-.095,.055],[-.13,.035],[-.155,.135],[-.065,.1],[-.024,.06],[-.018,.09]];
   outline.forEach(([x,y],i)=> { if (!i) bat.moveTo(x,y); else bat.lineTo(x,y); }); bat.closePath();
   const heraldry = new THREE.ShapeGeometry(bat); heraldry.translate(0, -0.025, -0.177); add(heraldry, chest, 'dark');
+  }
   // Bind once; all visible anatomy/armor shares the actual articulated skeleton.
   container.updateWorldMatrix(true, true);
   const skeleton = new THREE.Skeleton(bones);
@@ -155,18 +162,22 @@ export function createHumanRig(parent: THREE.Group, controls: RigControls) {
   for(let y=0;y<64;y++)for(let x=0;x<64;x++){
     const u=((x+(Math.floor(y/8)%2)*4)%8-4)/3.5,v=(y%8-4)/3;
     const ring=Math.abs(Math.sqrt(u*u+v*v)-0.9)<0.18;
-    const value=ring?132:212; const at=(y*64+x)*4;mailPixels.set([value,value,value,255],at);
+    const value=modelReview?(ring?205:70):(ring?132:212); const at=(y*64+x)*4;mailPixels.set([value,value,value,255],at);
   }
-  const mailTexture=new THREE.DataTexture(mailPixels,64,64);mailTexture.wrapS=mailTexture.wrapT=THREE.RepeatWrapping;mailTexture.repeat.set(2,3);mailTexture.needsUpdate=true;
+  const mailTexture=new THREE.DataTexture(mailPixels,64,64);mailTexture.wrapS=mailTexture.wrapT=THREE.RepeatWrapping;mailTexture.repeat.set(modelReview?5:2,modelReview?6:3);mailTexture.needsUpdate=true;
   for (const [name, geometries] of parts) {
     const merged = mergeGeometries(geometries); if (!merged) throw new Error('Character geometry merge failed');
     for (const geometry of geometries) geometry.dispose();
-    const material = new THREE.MeshToonMaterial({ color: colors[name], gradientMap: gradient, vertexColors: true, side: THREE.DoubleSide });
+    const material = modelReview && (name === 'steel' || name === 'edge') ? new THREE.MeshStandardMaterial({ color: colors[name], metalness: .68, roughness: .40, vertexColors: true, side: THREE.DoubleSide }) : new THREE.MeshToonMaterial({ color: colors[name], gradientMap: gradient, vertexColors: true, side: THREE.DoubleSide });
     if(name==='mail')material.map=mailTexture;
     const mesh = new THREE.SkinnedMesh(merged, material); mesh.name = `${name} skinned surface`; mesh.castShadow = true; mesh.receiveShadow = true; mesh.frustumCulled = false; container.add(mesh); mesh.bind(skeleton); meshes.push(mesh);
     const ink = new THREE.MeshBasicMaterial({ color: '#18242b', side: THREE.BackSide });
-    ink.onBeforeCompile = shader => { shader.vertexShader = shader.vertexShader.replace('#include <project_vertex>', 'transformed += normalize(objectNormal) * 0.004;\n#include <project_vertex>'); };
+    ink.onBeforeCompile = shader => { shader.vertexShader = shader.vertexShader.replace('#include <project_vertex>', `transformed += normalize(objectNormal) * ${modelReview ? '0.0013' : '0.004'};\n#include <project_vertex>`); };
     const contour = new THREE.SkinnedMesh(merged, ink); contour.name = 'Ink contour'; contour.frustumCulled = false; container.add(contour); contour.bind(skeleton, mesh.bindMatrix);
+  }
+  if(modelReview) {
+    for(const limb of limbs) { limb.shoulder.rotation.z=limb.side*.12; limb.elbow.rotation.x=-.06; limb.hand.rotation.y=limb.side*.45; }
+    container.updateWorldMatrix(true,true); skeleton.update();
   }
   const down = new THREE.Vector3(0,-1,0);
   function localPoint(object: THREE.Object3D, point: THREE.Vector3) { return container.worldToLocal(object.localToWorld(point)); }
@@ -251,7 +262,9 @@ export function createHumanRig(parent: THREE.Group, controls: RigControls) {
       for (const cap of caps) { cap.removeFromParent(); cap.geometry.dispose(); (cap.material as THREE.Material).dispose(); }
       caps.length = 0;
     },
-    update(grip = 1, gait = 0, phase = 0) {
+    /** `lower` lets the footwork system drive the pelvis and legs; without it the rig's own leg solve is unchanged. */
+    update(grip = 1, gait = 0, phase = 0, lower?: LowerBodyOverride | null) {
+      const drive = lower && lower.weight > 0 ? lower : null;
       const pose = controls.body;
       pelvis.position.set(pose.position.x * 0.7, 0.94 + pose.position.y * 0.75, pose.position.z * 0.5);
       pelvis.rotation.set(pose.rotation.x * 0.2,pose.rotation.y * 0.4,pose.rotation.z * 0.4);
@@ -259,6 +272,12 @@ export function createHumanRig(parent: THREE.Group, controls: RigControls) {
       ribs.rotation.set(pose.rotation.x * 0.3,pose.rotation.y * 0.2,pose.rotation.z * 0.2);
       chest.rotation.set(pose.rotation.x * 0.25,pose.rotation.y * 0.15,pose.rotation.z * 0.15);
       head.rotation.set(-0.035,-pose.rotation.y * 0.15,0);
+      if (drive) {
+        pelvis.position.lerp(drive.pelvisPosition, drive.weight); pelvis.quaternion.slerp(drive.pelvisQuaternion, drive.weight);
+        // The hips turn with the stance; hand part of that turn back through the spine and head.
+        spine.rotation.y += drive.spineYaw * 0.4 * drive.weight; ribs.rotation.y += drive.spineYaw * 0.35 * drive.weight;
+        chest.rotation.y += drive.spineYaw * 0.25 * drive.weight; head.rotation.y += drive.headYaw * drive.weight;
+      }
       container.updateWorldMatrix(true,true);
       for (const [index, limb] of limbs.entries()) {
         const target = localPoint(controls.feet[index], new THREE.Vector3());
@@ -266,6 +285,11 @@ export function createHumanRig(parent: THREE.Group, controls: RigControls) {
         const footRotation = controls.feet[index].getWorldQuaternion(new THREE.Quaternion());
         const kneeRotation = limb.knee.getWorldQuaternion(new THREE.Quaternion()); limb.ankle.quaternion.copy(kneeRotation.invert().multiply(footRotation));
         limb.toe.rotation.x = Math.max(0,Math.sin(phase + index*Math.PI)) * gait * 0.12;
+        if (drive) {
+          const leg = drive.legs[index];
+          limb.hip.quaternion.slerp(leg.thigh, drive.weight); limb.knee.quaternion.slerp(leg.shin, drive.weight); limb.ankle.quaternion.slerp(leg.foot, drive.weight);
+          limb.toe.rotation.x += (leg.toe - limb.toe.rotation.x) * drive.weight;
+        }
         container.updateWorldMatrix(true,true);
         const handTarget = localPoint(controls.sword,new THREE.Vector3(0,limb.side < 0 ? -0.16 : 0.02,0));
         if (limb.side < 0 && grip < 1) {

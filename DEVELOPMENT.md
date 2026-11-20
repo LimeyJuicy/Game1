@@ -112,3 +112,25 @@ The original region and its ink contour are removed together, with separation ca
 Final sever-site skinning/art, armor clearance through authored clips, cloth, and blood effects remain production work. No new maps, waves, balance pass, or final UI was added.
 
 Animation/asset integration reference: src/finisher.ts owns the five definitions, paths, compatibility, and event timing. src/humanRig.ts tags native surfaces with bodyRegion (0 retained body, 1 head, 2 sword arm) and snapshots the posed region at sever time. src/knight.ts owns weapon release and temporary paired poses; src/debris.ts owns detached-object lifetime and disposal. Keep those mechanics interfaces when replacing the procedural sample with final rigged assets. Shared textures remain owned by the actor; detached geometry/material clones are owned by debris. The practice preference persists separately from target eligibility; automatic variety advances after activation and across practice restarts, while arena defeat reset restarts its order.
+
+## Experimental footwork system (AT-007) — 2026-11-19
+
+Off by default. Opening the game with `?footwork` lets the footwork system in `src/footwork/` drive the player's hips and legs while engaged; without the flag the object is never created.
+
+- `legs.ts` solves the lower body from foot and pelvis placements: hips sink when a planted foot is out of reach, each knee bends over its own toes, and a pitched foot pivots on its heel or ball.
+- `stances.ts` holds the guards, the lunge and the transition tuning as data.
+- `controller.ts` keeps the feet in world space. `advance(dt)` runs once per simulation tick and is the only state change; `pose()` is a pure read, so the repeated posing done by blade hit sampling cannot disturb it.
+- `game.ts` follows the gameplay root, lunges on the attack clock using `lungeBudget`, and snaps to a guard when blocking.
+- `humanRig.update` takes an optional lower-body override and `createKnight` exposes `setLowerBody` and a `carrier` group. Both do nothing unless a caller supplies an override.
+
+Under the flag only: engaged speed is the guard's own pace (about 1.15 forward, 0.72 sideways, 0.69 while blocking) instead of 4.2 and 1.7; E cancels an attack at any point except a riposte; the drawn upper body rides on the lowered hips while blade hit tests keep the game's own sword placement. These are open decisions, not adopted design.
+
+`npm run footwork:dev` opens the bench on port 5175, `npm run footwork:report` prints measured travel and speed for every move, and `npm run footwork:test:browser` checks the bench page. See `Animation Testing/AT-007-FOOTWORK.md`.
+
+## AT-017 current sword-cut review
+
+Run `npm run footwork:dev`, open `http://127.0.0.1:5175/?cut`. Play the downloaded single-handed cut with Planted feet or Short attack step. The current sword attachment profile resizes the original mesh to about 1.10 m, right hand only; the left arm follows source motion. Shared pure clip/leg pose evaluation feeds one final skeleton/sword commit. Original footwork and Phase A editors remain available; no live combat-rule/damage migration is included. See Animation Testing/AT-017-Cut-Footwork/README.md.
+
+## AT-018 animation library review
+
+Run `npm run footwork:dev`, open `http://127.0.0.1:5175/?animations`. Category/Animation selects among 69 review adaptations on the actual single-handed knight. Playback, speed, scrub and view helpers are shared with the cut demo. The original `/?cut`, `/` footwork and earlier `/?upperbody&phaseA` studies remain available. See Animation Testing/AT-018-Animation-Library/README.md for ownership, data editing, generated-source checks, credits and explicit custom-work gaps. No gameplay integration or combat-rule change is implied.

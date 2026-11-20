@@ -6,7 +6,7 @@ test('full body coordinates upper joints and compares with identical leg phase',
   const errors: string[] = [];
   page.on('pageerror', error => errors.push(error.message));
   page.on('console', message => { if (message.type() === 'error') errors.push(message.text()); });
-  await page.goto('/?carry=off');
+  await page.goto('/?mode=animation&carry=off');
   await expect(page.locator('#stats')).toContainText('43 clips');
   await expect(page.locator('#clip option:checked')).toHaveText('Walk_Loop · supplied');
   await page.getByRole('button', { name: 'Pause', exact: true }).click();

@@ -12,7 +12,14 @@
     "rig:dev": "vite \"Animation Testing/AT-001-Rig-Workbench/viewer\" --host 127.0.0.1 --port 5174 --strictPort",
     "rig:build": "tsc --project \"Animation Testing/AT-001-Rig-Workbench/viewer/tsconfig.json\" && vite build \"Animation Testing/AT-001-Rig-Workbench/viewer\"",
     "rig:prepare": "python3 \"Animation Testing/AT-001-Rig-Workbench/tools/prepare.py\"",
-    "rig:test": "node --experimental-strip-types --test \"Animation Testing/AT-001-Rig-Workbench/tests/legs.test.ts\""
+    "rig:test": "node --experimental-strip-types --test \"Animation Testing/AT-001-Rig-Workbench/tests/legs.test.ts\" \"Animation Testing/AT-001-Rig-Workbench/tests/two-hand.test.ts\"",
+    "rig:knight": "node --experimental-strip-types \"Animation Testing/AT-001-Rig-Workbench/tools/rigging/rig-knight.mjs\"",
+    "rig:verify": "node \"Animation Testing/AT-001-Rig-Workbench/tools/rigging/verify-rig.mjs\"",
+    "rig:sword": "python3 \"Animation Testing/AT-001-Rig-Workbench/tools/sword/prepare_sword.py\"",
+    "footwork:dev": "vite \"Animation Testing/AT-007-Footwork/viewer\" --host 127.0.0.1 --port 5175 --strictPort",
+    "footwork:build": "tsc --project \"Animation Testing/AT-007-Footwork/viewer/tsconfig.json\" && vite build \"Animation Testing/AT-007-Footwork/viewer\"",
+    "footwork:report": "node --experimental-strip-types \"Animation Testing/AT-007-Footwork/tools/footwork-report.ts\"",
+    "footwork:test:browser": "playwright test --config \"Animation Testing/AT-007-Footwork/playwright.config.ts\""
   },
   "dependencies": {
     "three": "^0.187.0"

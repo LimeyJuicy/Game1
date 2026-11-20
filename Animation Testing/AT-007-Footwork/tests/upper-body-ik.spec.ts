@@ -1,0 +1,23 @@
+import{test,expect}from'@playwright/test';import fs from'node:fs';import{fileURLToPath}from'node:url';
+test('Phase A actual knight targets, extension clock, trajectory and JSON reproduce',async({page})=>{
+ const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));
+ await page.goto('/?upperbody&phaseA');await page.waitForFunction(()=>(window as any).__upperbody?.state.bones===66,null,{timeout:60000});
+ const state=()=>page.evaluate(()=>(window as any).__upperbody.state);
+ expect((await state()).phaseA.enabled).toBe(true);expect((await state()).ik.targetError).toBeLessThan(.00001);
+ await expect(page.locator('#hud')).toContainText('contact probe: HIT');
+ await page.getByRole('button',{name:'Front',exact:true}).click();await page.screenshot({path:fileURLToPath(new URL('../evidence/imported/phase-a-target.png',import.meta.url))});
+ await page.locator('#ik-roll').fill('20');await page.locator('#ik-roll').dispatchEvent('change');await page.locator('#ik-pos-1').fill('1.3');await page.locator('#ik-pos-1').dispatchEvent('change');
+ expect(await page.evaluate(()=>(window as any).__upperbody.library.phaseA.target.roll)).toBe(20);
+ await page.locator('#ik-time').fill('0.7');await expect(page.locator('#ik-time-label')).toContainText('extension');
+ const before=await state();await page.screenshot({path:fileURLToPath(new URL('../evidence/imported/phase-a-extension.png',import.meta.url))});
+ const downloadEvent=page.waitForEvent('download');await page.getByRole('button',{name:'Download JSON',exact:true}).click();const download=await downloadEvent;const saved=JSON.parse(fs.readFileSync((await download.path())!,'utf8'));expect(saved.phaseA.target.roll).toBe(20);
+ await page.getByRole('button',{name:'Reset Phase A',exact:true}).click();await page.locator('#file').setInputFiles({name:'phase-a.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(saved))});await expect(page.locator('#status')).toContainText('Pose library loaded');
+ await page.locator('#ik-time').fill('0.7');await expect.poll(async()=>(await state()).rotations).toEqual(before.rotations);
+ await page.getByRole('button',{name:'Play extension',exact:true}).click();await page.waitForFunction(()=>(window as any).__upperbody.state.phaseA.time>.75);await page.getByRole('button',{name:'Pause extension',exact:true}).click();const paused=(await state()).phaseA.time;await page.waitForTimeout(250);expect((await state()).phaseA.time).toBe(paused);
+ await page.locator('#ik-controls summary').click();await page.locator('#ik-limit-elbowMin').fill('160');await page.locator('#ik-limit-elbowMin').dispatchEvent('change');
+ expect(await page.evaluate(()=>(window as any).__upperbody.library.phaseA.limits.elbowMin)).toBe(12);await expect(page.locator('#ik-controls details')).toHaveJSProperty('open',true);
+ for(const[key,value]of [['preparation','0'],['extension','0.1'],['hold','0'],['recovery','0.1']]){await page.locator(`#ik-${key}`).fill(value);await page.locator(`#ik-${key}`).dispatchEvent('change');}expect((await state()).phaseA.time).toBeLessThanOrEqual(.2);
+ await page.locator('#ik-pos-2').fill('-3');await page.locator('#ik-pos-2').dispatchEvent('change');await expect.poll(async()=>(await state()).ik.projectionError).toBeGreaterThan(1);
+ await page.getByRole('button',{name:'Reset Phase A',exact:true}).click();await page.locator('#ik-time').fill('0.8');await page.getByRole('button',{name:'Side',exact:true}).click();await page.screenshot({path:fileURLToPath(new URL('../evidence/imported/phase-a-side.png',import.meta.url))});
+ expect(errors).toEqual([]);
+});

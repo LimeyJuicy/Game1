@@ -1,0 +1,15 @@
+# Blender MTL File: 'Sword.blend'
+# Material Count: 1
+
+newmtl Sword
+Ns 62.500000
+Ka 1.000000 1.000000 1.000000
+Kd 0.041452 0.464741 0.067725
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd D:\\3D\\M_Y-A_S_S_E_T_S\\Weapon\\Cold_Weapon\\SetMeleeWeapon\\Sword_Palash\\Textures\\PBR Metallic Roughness\\Sword_BaseColor.png
+map_Ns D:\\3D\\M_Y-A_S_S_E_T_S\\Weapon\\Cold_Weapon\\SetMeleeWeapon\\Sword_Palash\\Textures\\PBR Metallic Roughness\\Sword_Roughness.png
+refl D:\\3D\\M_Y-A_S_S_E_T_S\\Weapon\\Cold_Weapon\\SetMeleeWeapon\\Sword_Palash\\Textures\\PBR Metallic Roughness\\Sword_Metallic.png

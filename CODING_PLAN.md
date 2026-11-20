@@ -1,5 +1,7 @@
 # Coding Plan — Medieval Sword Combat
 
+**Current focus — player model:** user paused animation authoring and requested static model work in the existing viewer. See [PLAYER_MODEL.md](PLAYER_MODEL.md). The user-supplied GLB is now the default static model; the original remains unrigged, while a separate experimental 66-bone derivative now plays retargeted Quaternius motion for review (AT-009). Gameplay appearance and prior combat/waves/map scheduling remain unchanged.
+
 Planning document only. This roadmap does not start or authorize implementation.
 
 Design source: [GAME_DESIGN.md](GAME_DESIGN.md). Work in the order below, advancing when each milestone's exit criteria are satisfied. Numerical settings remain adjustable until playtesting establishes good values.
@@ -28,7 +30,7 @@ Current priority, 2026-11-18: finish core gameplay mechanics first using the cur
 
 ## Intended first playable stage
 
-One browser-playable arena with the specified knight and longsword, readable group combat, all player actions, five finishers, the illustrated visual treatment, and a complete wave/reward/death/restart loop.
+One browser-playable arena with the specified knight and single-handed sword, readable group combat, all player actions, five finishers, the illustrated visual treatment, and a complete wave/reward/death/restart loop.
 
 The first stage needs enough waves to exercise the mechanics; the wave count and reward pool require a later design decision. Additional maps, weapon types, enemy rosters, and persistent progression follow afterward. Each map is a separate level; the planned roster and shared environment principles are recorded in GAME_DESIGN.md, section 15. Level order and unlocks remain undefined.
 
@@ -173,9 +175,9 @@ The sequence begins only when eligible, does not teleport through scenery, regis
 ### Build
 
 - Confirm helmet reference, knight proportions, bat crest, and a small illustrated visual reference sheet before producing final assets.
-- Replace the placeholder with a rigged silver/red knight and two-handed longsword.
+- Replace the placeholder with a rigged silver/red knight and resized single-handed sword.
 - Establish export scale, skeleton conventions, weapon attachment, animation event markers, and collision alignment.
-- Replace the block-shaped stand-in with a complete human-proportioned knight. Build independent pelvis/spine/neck, clavicle/shoulder, arm/elbow/forearm-twist, wrist/hand/finger, hip/knee, and ankle/foot/toe articulation, with natural limits and two-handed grip controls. Check deep attack poses for stretching and armor/cloth interference before authoring the complete animation library.
+- Replace the block-shaped stand-in with a complete human-proportioned knight. Build independent pelvis/spine/neck, clavicle/shoulder, arm/elbow/forearm-twist, wrist/hand/finger, hip/knee, and ankle/foot/toe articulation, with natural limits and a secure single-handed sword grip. Check deep attack poses for stretching and armor/cloth interference before authoring the complete animation library.
 - Add all light-cut directions and the three heavy variants, preserving each attack's timing contract.
 - Expanded final animation target: 12 light directions with at least two full-body executions each, plus three heavy directions with at least two executions each (30 minimum). Confirm the 12-direction chart before authoring the full set. Require clear cut direction, stepping, weight transfer, hip/torso motion, coordinated arms, and recovery. Preserve collision-limited travel and recheck blade contacts after animation changes. The user approved completing this full library with the final rig after a small representative pass now.
 - Deep-cut criterion: the tip begins behind the player, follows an authored approximately 130–180 degree arc, and finishes well beyond contact. Verify the actual blade trajectory as well as the full-body silhouette; quaternion interpolation must not take an unintended shortcut.
@@ -287,3 +289,29 @@ Only minimal placeholder animation fixes needed to test mechanics or keep contac
 Replace the broad geometric actor with an articulated human-proportioned armored rig shared by player and enemies. Establish separate pelvis/spine, jointed limbs and hands, fitted armor and helmet, an identifiable bat crest, clean illustrated materials, low running carry/regrip, connected representative poses, and an occasional authored backspin variant. Provide an inspection view and verify gameplay timing/contact against the same mesh. Final clip production and visual acceptance are deferred to the last production phase. Systems and temporary finisher prototypes may proceed before that review.
 
 Character sample review: [CHARACTER_QUALITY.md](CHARACTER_QUALITY.md) documents the implemented native skeleton, fitted armor, carry/regrip, representative motion, occasional backspin, and visual acceptance criteria. Review it in the courtyard and `/?study` before marking final character/animation work complete.
+
+
+### AT-011 — Two-handed sword fitting (isolated preview)
+
+The user-supplied sword is scaled and attached to the fitted knight in the animation viewer. Both-hand shoulder carry supersedes the earlier low one-handed running proposal. Idle/walk/formal-walk/jog/sprint carry variants retain source lower-body/trunk motion. Final grip/armor skinning quality, guard/attack transitions, authored polish and gameplay integration remain pending; no final animation milestone is marked complete. See PLAYER_SWORD.md and the append-only animation learning log.
+
+
+### AT-012 — PR #1 footwork with supplied knight
+
+Imported the PR into local testing/knight-footwork work and adapted the separate bench to the approved knight/sword. All footwork families and controls remain available; optional anatomy measurements preserve legacy solver defaults. Default bench uses the imported actor; the comparison and game remain on their prior actor. See Animation Testing/AT-012-KNIGHT-FOOTWORK.md. Final upper-body combat guards, transitions and mesh deformation polish are still pending.
+
+### AT-014 — Approved upper-body Stages 0–2 implemented for review
+
+Shared rig profile, complete pose buffers/FK, deterministic guard evaluator and validated pose assets now support the actual imported knight in the existing footwork workbench at /?upperbody. Two guards, independent upper-joint sliders, limited sword-socket calibration, timed playback/scrub, reset and JSON download/load are implemented. Lower-body stance is fixed in this editor and existing footwork remains separately available. See Animation Testing/AT-014-UPPER-BODY-EDITOR.md. Stop here for user visual review: live arm IK/targets, attacks and gameplay integration remain unimplemented Stage 3+ work.
+
+### AT-015 — Phase A (Stages 3–5) implemented for review
+
+Approved continuation reuses Stages 0–2 and adds bounded two-arm IK, editable weapon grip/orientation/edge-roll targets, stationary extension with preparation/recovery and final-transform trajectory/contact validation. Optional Phase A JSON data and controls live in the same workbench/evaluator; existing guard and footwork modes remain available. See Animation Testing/AT-015-PHASE-A.md. No live combat damage/rule changes. Stop after Phase A: moving attacks/lunges/parries/feints and live collision migration (B), general keyframes/curves/trajectory authoring (C), plus mesh/animation polish remain pending.
+
+### AT-017 — One downloaded cut + PR footwork, single-handed revision
+
+The next isolated proof combines a downloaded sword cut with the existing PR planner: planted feet versus a short attack step and recovery. User changed the weapon direction to single-handed during implementation. The current preview resizes the supplied mesh through a persistent attachment profile (scale 0.34, about 1.10 m), keeps the right grip attached and leaves the left arm free. Earlier two-hand/Phase A studies remain available. This is not completion of all Phase B/C work or live combat migration. See Animation Testing/AT-017-Cut-Footwork/README.md.
+
+### AT-018 — Expanded single-handed animation review library
+
+Reused AT-017 sampling/footwork and added a data-driven 69-preview catalogue at `/?animations`. PR feet own standing/guarded actions; authored full-body clips own rolls, kicks, falls and travel. Includes eight-way movement/evasion, individual attacks/recoveries, guards/parry, feint, dash-cut candidate, reactions and enemy motions. Plan data and final FK remain deterministic; original PR controller/live combat rules are unchanged. See Animation Testing/AT-018-Animation-Library/README.md and COVERAGE.md. This does not mark all Phase B/C or the full production animation inventory complete: paired finishers, distinct directional executions and physical live transitions remain pending.

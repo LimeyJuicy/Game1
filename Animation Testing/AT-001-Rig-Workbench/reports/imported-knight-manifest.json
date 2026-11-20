@@ -1,0 +1,28 @@
+{
+  "source_file": "/Users/tajclement/Downloads/red-herald-knight.glb",
+  "project_file": "Animation Testing/AT-001-Rig-Workbench/viewer/public/models/red-herald-knight.glb",
+  "sha256": "9be0076e9503389fa526aa503fac7016e2b1a8d83ed8f2b0a819198cd2a340b0",
+  "bytes": 15359920,
+  "generator": "Tripo",
+  "meshes": 1,
+  "skins": 0,
+  "animations": 0,
+  "embedded_images": 3,
+  "vertices": 167063,
+  "triangles": 309910,
+  "bounds": {
+    "min": [
+      -0.22061920166015625,
+      0.0,
+      -0.11177827417850494
+    ],
+    "max": [
+      0.22061920166015625,
+      1.0,
+      0.11177827417850494
+    ]
+  },
+  "modifications": "None to GLB bytes, geometry or embedded materials. Viewer centers display; original asset scale retained.",
+  "provenance": "User supplied as replacement player-model source. License/source terms not independently supplied; no new ownership or redistribution claim.",
+  "original_source_filename": "a706fc1d-51ba-496f-9ce8-a73df9c7dd93.glb"
+}

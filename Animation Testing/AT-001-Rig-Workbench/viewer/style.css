@@ -3,3 +3,5 @@
 a{color:#d6c28f}
 
 [hidden]{display:none!important}aside{min-width:0}.views{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}.views button{min-width:0}
+
+body[data-mode="model"] .animation-only{display:none!important}

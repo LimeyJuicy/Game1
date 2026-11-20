@@ -1,0 +1,146 @@
+{
+  "input": "/Users/tajclement/HTCS-Projects/Game1/Animation Testing/AT-001-Rig-Workbench/viewer/public/models/red-herald-knight.glb",
+  "output": "/Users/tajclement/HTCS-Projects/Game1/Animation Testing/AT-001-Rig-Workbench/viewer/public/models/red-herald-knight-rigged.glb",
+  "sourceMeshSha256": "9be0076e9503389fa526aa503fac7016e2b1a8d83ed8f2b0a819198cd2a340b0",
+  "outputSha256": "c809d83ebc603974a468c1523547685f3adcd67e7bb43056dbb9f55ef15ae9f1",
+  "vertices": 167063,
+  "triangles": 309910,
+  "bones": 78,
+  "animationClips": 43,
+  "clothConstrainedVertices": 30067,
+  "rigidHelmetVertices": 11984,
+  "maximumWeightSumError": 0,
+  "maximumSampledBindPoseError": 1.910785109008974e-8,
+  "landmarks": {
+    "root": [
+      0,
+      0,
+      0
+    ],
+    "pelvis": [
+      0,
+      0.535,
+      -0.005
+    ],
+    "spine_01": [
+      0,
+      0.615,
+      0
+    ],
+    "spine_02": [
+      0,
+      0.69,
+      0.003
+    ],
+    "spine_03": [
+      0,
+      0.765,
+      0.003
+    ],
+    "neck_01": [
+      0,
+      0.854,
+      0.002
+    ],
+    "Head": [
+      0,
+      0.906,
+      0.001
+    ],
+    "clavicle_l": [
+      0.025,
+      0.813,
+      -0.002
+    ],
+    "upperarm_l": [
+      0.139,
+      0.803,
+      -0.002
+    ],
+    "lowerarm_l": [
+      0.177,
+      0.669,
+      0.006
+    ],
+    "hand_l": [
+      0.202,
+      0.528,
+      0.012
+    ],
+    "thigh_l": [
+      0.071,
+      0.529,
+      -0.005
+    ],
+    "calf_l": [
+      0.086,
+      0.292,
+      0.006
+    ],
+    "foot_l": [
+      0.103,
+      0.067,
+      -0.018
+    ],
+    "ball_l": [
+      0.111,
+      0.026,
+      0.068
+    ],
+    "ball_leaf_l": [
+      0.113,
+      0.017,
+      0.108
+    ],
+    "clavicle_r": [
+      -0.025,
+      0.813,
+      -0.002
+    ],
+    "upperarm_r": [
+      -0.139,
+      0.803,
+      -0.002
+    ],
+    "lowerarm_r": [
+      -0.177,
+      0.669,
+      0.006
+    ],
+    "hand_r": [
+      -0.202,
+      0.528,
+      0.012
+    ],
+    "thigh_r": [
+      -0.071,
+      0.529,
+      -0.005
+    ],
+    "calf_r": [
+      -0.086,
+      0.292,
+      0.006
+    ],
+    "foot_r": [
+      -0.103,
+      0.067,
+      -0.018
+    ],
+    "ball_r": [
+      -0.111,
+      0.026,
+      0.068
+    ],
+    "ball_leaf_r": [
+      -0.113,
+      0.017,
+      0.108
+    ]
+  },
+  "notes": [
+    "Original static GLB unchanged. Geometry/UV/material/image data retained.",
+    "Body joint fit and first-pass weights require visual approval; finger cleanup and cloth-body collision are not certified.",
+    "Source body rotations/timing retained; fitted local translations and scaled root/pelvis motion; additional cloth tracks are derived."
+  ]
+}

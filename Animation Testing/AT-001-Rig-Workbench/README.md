@@ -1,5 +1,7 @@
 # AT-001 — Examplerig workbench
 
+**Default now: static knight modeling.** Open http://127.0.0.1:5174 to inspect the supplied player GLB without animation controls. The previous native knight is preserved at `/?model=legacy`. See [PLAYER_MODEL.md](../../PLAYER_MODEL.md). Animation work below is preserved at `/?mode=animation`; previous query parameters must include that mode. Animation authoring remains paused after user rejection of the carry. No separate site was created.
+
 Isolated browser animation showcase. The user chose not to install Blender, so the default reference is the user-supplied Quaternius Standard GLB. The prior Mixamo reference and procedural study remain selectable. The original Examplerig.blend and its working copy remain archived unchanged. No main-game assets are replaced.
 
 ## Active browser-first workflow
@@ -65,3 +67,16 @@ Asset provenance/reuse terms are not yet recorded. No claim of production readin
 - [Blender glTF export API](https://docs.blender.org/api/current/bpy.ops.export_scene.html): exporter options; prepared script checks available properties.
 - [Blender file compatibility guidance](https://developer.blender.org/docs/handbook/guidelines/compatibility_handling_for_blend_files/): legacy files require practical validation.
 - [Blender scripting controls](https://docs.blender.org/manual/en/5.0/advanced/scripting/security.html): embedded script execution is kept disabled during initial inspection.
+
+
+## Supplied knight rig review — AT-009
+
+The original supplied model remains the default static view. A separate fitted derivative is available at http://127.0.0.1:5174/?mode=animation&reference=rigged-knight (66 bones, 43 retargeted Quaternius clips). Static fitted rest pose: /?model=rigged. The rejected sword-carry adaptation is disabled on this asset. Initial body rig only: armor/fingers/cloth need deformation cleanup; no main-game integration or user acceptance implied. See [AT-009 notes](../AT-009-KNIGHT-RIG.md). Rebuild with `npm run rig:knight`; validate serialized geometry/skin/motion with `npm run rig:verify`.
+
+## Supplied sword review — AT-010
+
+Open http://127.0.0.1:5174/?model=sword for the standalone textured sword. Rebuild from the supplied OBJ/PBR maps using `npm run rig:sword` (Python/Pillow). Originals remain untouched. See [PLAYER_SWORD.md](../../PLAYER_SWORD.md) for material conversion, inventory and pending hand fitting. Default knight and animation experiments remain unchanged.
+
+## Two-hand shoulder carry — AT-011
+
+The fitted knight animation route now loads the supplied sword at scale 0.54 and defaults to both-hand shoulder carry: http://127.0.0.1:5174/?mode=animation&reference=rigged-knight . Right hand near the guard, left toward the pommel, blade laid backward over the right shoulder. Select Idle/Walk/Formal Walk/Jog/Sprint carry variants, or disable the carry checkbox for supplied motion. Original static model/asset files and earlier experiments are preserved. `npm run rig:test` checks shared grip contact between animation keys and retained source body/leg tracks; visual acceptance remains separate. See PLAYER_SWORD.md.

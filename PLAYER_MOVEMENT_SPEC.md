@@ -1,5 +1,7 @@
 # Player movement and animation specification
 
+**Current weapon decision — 2026-11-19, AT-017 revision:** use the resized sword single-handed in the right hand; the left arm is free. The review profile uses scale 0.34 (about 1.10 m on the knight). This supersedes the earlier two-handed shoulder carry. Two-hand-specific directions below describe earlier studies, not current requirements. Single-handed travel poses and final animation polish still need review.
+
 **Latest scheduling decision — 2026-11-18:** core gameplay/combat mechanics first using existing practice/debug UI, test arena, and placeholder motion. Waves/rewards, weather, final UI, maps, and balance are deferred until after core mechanics and before final animation production/polish. Earlier conflicting sequencing is superseded by [CODING_PLAN.md](CODING_PLAN.md#updated-production-order--2026-11-18). Existing motion remains visually unaccepted; preserve its quality requirements for the final phase. This documentation update does not itself resume coding.
 
 Discussion and authoring reference — 2026-11-18. Player only. Player-animation production remains deferred. After the discussion pause, the user separately authorized the core-mechanics audit and first finisher prototype; this motion reference does not itself authorize additional implementation. It records intended motion, not completed animations.
@@ -63,7 +65,7 @@ Follow one foot from contact to its next contact. The opposite leg is in its com
 
 Use a natural step width and modest foot turnout, not a broad outward-pointing duck stance. Do not force perfectly parallel feet either. Check hip/knee/ankle alignment from the front, and full clearance/support from the side. The planted foot should hold its world position until its intended roll, pivot, or lift.
 
-Sword carry is asymmetric: sword beside the body, point directed outward and backward with floor clearance. During walking and sprinting, the back of the sword hand faces the sky and the palm faces down. Keep the grip fixed while the wrist/forearm orient the blade; the weapon arm remains bent and swings with restrained but visible motion. The free arm participates naturally. Do not freeze the chest and both shoulders to hold the sword still.
+The resized sword is held in the right hand, with the left arm free to swing and counterbalance. Choose a matching single-handed travel pose from the source clips; shoulder, elbow and wrist motion should remain continuous, with the blade clear of the body and floor. Earlier two-handed travel studies remain comparison references.
 
 ## 5. Running, sprinting, and movement directions — LOC-04–10
 
@@ -71,7 +73,7 @@ Sword carry is asymmetric: sword beside the body, point directed outward and bac
 | --- | --- | --- |
 | Faster travel / jog, if needed | Transition into a distinct running rhythm rather than speeding up the walking loop indefinitely. | Coordinated arm action and modest forward inclination; preserve carry clearance. |
 | Sprint forward | Stronger support-leg drive, faster recovery of swing leg, greater knee travel; feet land beneath a believable moving body. An airborne phase may occur in a true run. | Lean comes from whole-body alignment rather than folding only the waist. Shoulder/chest rotation increases appropriately; free elbow bends more; sword arm remains controlled. |
-| Combat advance | Shorter measured steps with forward weight transfer; avoid shuffling both feet together. | Maintain target-facing chest/head and usable two-handed sword guard. |
+| Combat advance | Shorter measured steps with forward weight transfer; avoid shuffling both feet together. | Maintain target-facing chest/head and usable single-handed sword guard. |
 | Combat retreat | Reach a foot backward, accept weight, then reposition the other; controlled limited travel. | Chest remains available to the opponent; do not use a reversed forward-walk clip. |
 | Strafe left | Left foot opens space, right follows; adjust order for current support phase. Avoid habitual crossed feet. | Head/chest remain oriented toward focus; pelvis accommodates side travel; hands remain in guard. |
 | Strafe right | Right foot opens space, left follows, adapted to support phase. | Same controlled guard with anatomically appropriate shoulder adjustment. |
@@ -95,7 +97,7 @@ Walk and sprint must change cadence and stride with actual speed, including coll
 | Sharp reversal | Brake, place a turning foot, rotate through hips/chest with safe pivots or replacement steps, then accelerate. |
 | Turn in place | Small foot adjustments for small angles; multiple repositioned contacts for large angles. No swivel on two glued feet. |
 | Acquire/change target | Head/chest acknowledge first, then hips/feet establish the new guard. Respect the currently committed attack trajectory. |
-| Retreat → disengaged sprint | Move away, turn out of guarded travel with suitable steps, release support-hand grip, lower sword, accelerate. |
+| Retreat → disengaged sprint | Move away, turn out of guarded travel with suitable steps, retain both grips, route blade over shoulder, accelerate. |
 | Run → engagement | Brake into fighting distance, turn with footwork, bring support hand onto sword, settle into ready guard or permitted attack entry. |
 | Wall/body stops travel | Shorten the next step and settle using actual displacement; do not keep pumping full strides into the obstruction. |
 | Supported slope/uneven surface | Adapt foot height/angle, knees and pelvis within anatomical reach; conditional on supported terrain. |
@@ -103,7 +105,7 @@ Walk and sprint must change cadence and stride with actual speed, including coll
 
 ## 7. Light swings 1–6 — L01–L06
 
-All strikes use two-handed grip, a deep blade load with the tip behind the player, approximately 130–180 degrees of readable travel, fast committed blade motion, and controlled follow-through. Preserve timing: make the load slower and the cut faster, not the overall action longer. Authored attack footwork is allowed; player-controlled movement/steering is locked during commitment. A small target-closing step must respect obstacles and reach.
+All strikes use a right-handed grip with a free balancing arm, a deep blade load with the tip behind the player, approximately 130–180 degrees of readable travel, fast committed blade motion, and controlled follow-through. Preserve timing: make the load slower and the cut faster, not the overall action longer. Authored attack footwork is allowed; player-controlled movement/steering is locked during commitment. A small target-closing step must respect obstacles and reach.
 
 The following stance choices are proposals, not mandatory historical fencing forms. Fit them to the actual previous pose and hand dominance.
 
@@ -114,7 +116,7 @@ The following stance choices are proposals, not mandatory historical fencing for
 | Light 3: lower-left → upper-right | Lower hands to left, blade extending behind/low with floor clearance; compress knees slightly and coil through pelvis/chest. | Legs extend moderately as hips/chest rotate; hands carry the blade upward-right. Shoulder blades move with arm elevation; no shrug-driven wrist flick. | Blade finishes high-right; retain soft elbows and grounded balance. Settle raised shoulders and transfer into guard or another useful loading position. |
 | Light 4: lower-right → upper-left | Load low-right with compact knee/hip compression and a clear support leg. | Opposite diagonal drive and rotation lift the cut across target; hands remain connected to sword and shoulders. | Finish high-left, dissipate rotation, regain a stable stance. No backward arch to manufacture reach. |
 | Light 5: left → right horizontal | Hands and sword load to left around torso height; pelvis/chest coil, supporting foot established, blade deep behind. | Supporting leg and pelvis initiate a broad lateral sweep; chest follows and arms carry the blade through a readable level band. Use a step or pivot appropriate to distance. | Blade continues right beyond contact; torso/legs arrest rotation. Hands retain usable reach rather than wrapping unnaturally around the back. |
-| Light 6: right → left horizontal | Load right with balanced feet and modest torso twist. | Reverse lateral rotation/transfer, with coordinated shoulders, elbow bend, and forearm rotation through the two-handed grip. | Finish left, absorb momentum through receiving leg and torso, then settle or enter the next compatible action. |
+| Light 6: right → left horizontal | Load right with balanced feet and modest torso twist. | Reverse lateral rotation/transfer, with coordinated shoulders, elbow bend, and forearm rotation through the sword hand. | Finish left, absorb momentum through receiving leg and torso, then settle or enter the next compatible action. |
 
 ### Additional required light paths
 
@@ -216,7 +218,7 @@ If perfect-defense slow motion or the step has already completed, any allowed fo
 1. **Entry after perfect defense:** inherit parry/dodge exit; acquire source with head/chest and align supports. No attack during slow-motion input lock.
 2. **Load and launch:** compress supporting knee/ankle, establish forward inclination, drive off ground; hands prepare a compact fast cut.
 3. **Travel:** feet/strides match routed actual distance. Longer approach uses additional travel, not stretched limbs or sliding planted feet. Sword remains controlled.
-4. **Brake and impact:** receiving foot supports body at valid striking distance; pelvis/chest/shoulders drive the fast sword action with both hands attached.
+4. **Brake and impact:** receiving foot supports body at valid striking distance; pelvis/chest/shoulders drive the fast sword action with the sword hand attached and the free arm balancing.
 5. **Follow-through:** stop travel without overshooting through victim; complete decisive blade path and coordinated defense-break response.
 6. **Exit:** recover to usable guard or permitted punishment attack from actual final pose.
 
@@ -312,7 +314,7 @@ Review a single slow complete walking stride before adding variants. Inspect fro
 - [ ] Does the head stabilize naturally, move subtly, and anticipate turns without being welded or bobbling?
 - [ ] Does acceleration/braking change support and posture, not merely playback speed?
 - [ ] For each cut, can we see load, leg drive, pelvis/chest rotation, blade travel, receiving support, and complete recovery?
-- [ ] Are both hands attached, limbs unstretched, and blade/armor clear of body and floor?
+- [ ] Is the sword hand attached, the free arm natural, limbs unstretched, and blade/armor clear of body and floor?
 - [ ] Do all eight dodge directions and roll exits show physical push-off and reception?
 - [ ] Do abrupt inputs, allowed cancels, hits, walls, focus changes, and pause/resume preserve continuity?
 - [ ] Do hit/block/miss outcomes look different while preserving rules and timings?

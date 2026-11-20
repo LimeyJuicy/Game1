@@ -1,5 +1,7 @@
 # Medieval Sword Combat — Design Foundation
 
+**Current focus — player model:** user paused animation authoring and requested static model work in the existing viewer. See [PLAYER_MODEL.md](PLAYER_MODEL.md). The user-supplied GLB is now the default static model; the original remains unrigged, while a separate experimental 66-bone derivative now plays retargeted Quaternius motion for review (AT-009). Gameplay appearance and prior combat/waves/map scheduling remain unchanged.
+
 **Latest scheduling decision — 2026-11-18:** core gameplay/combat mechanics first using existing practice/debug UI, test arena, and placeholder motion. Waves/rewards, weather, final UI, maps, and balance are deferred until after core mechanics and before final animation production/polish. Earlier conflicting sequencing is superseded by [CODING_PLAN.md](CODING_PLAN.md#updated-production-order--2026-11-18). Existing motion remains visually unaccepted; preserve its quality requirements for the final phase. This documentation update does not itself resume coding.
 
 Status: planning only. No implementation or assets authorized by this document.
@@ -10,7 +12,7 @@ Animation production inventory: [animationslist.md](animationslist.md). It separ
 
 ## 1. Game direction
 
-A 3D medieval browser combat game built with Three.js. Players fight waves across different arenas using a grounded knight and a two-handed longsword.
+A 3D medieval browser combat game built with Three.js. Players fight waves across different arenas using a grounded knight and a single-handed sword.
 
 The experience centers on fast, intentional swordplay: reading attacks, managing defense, parrying, dodging, and exploiting openings. The knight is not a superhuman character. Skill and execution should make the player feel like a master swordsman.
 
@@ -97,7 +99,7 @@ Each of the three heavy directions needs at least two distinct executions (six h
 
 ### Full-body attack animation standard
 
-Cuts must clearly communicate direction through preparation, blade travel, and follow-through. Animate the whole body: planted support foot, a deliberate step into the swing, knee bend, weight transfer, hip and torso rotation, coordinated shoulders and elbows, two-handed grip, and a controlled recovery. Wrist-driven sword pivoting alone is not sufficient. Variants should differ in stance, footwork, and execution rather than only changing wrist angles.
+Cuts must clearly communicate direction through preparation, blade travel, and follow-through. Animate the whole body: planted support foot, a deliberate step into the swing, knee bend, weight transfer, hip and torso rotation, coordinated shoulders and elbows, a secure sword-hand grip, a balancing free arm, and a controlled recovery. Wrist-driven sword pivoting alone is not sufficient. Variants should differ in stance, footwork, and execution rather than only changing wrist angles.
 
 Cuts should be very large and originate deep: bring the blade tip behind the knight during windup, carry it through a roughly 130–180 degree sweep, and continue visibly past the target. Author the blade's cut plane and arc explicitly so interpolation does not shorten the swing. Preserve the existing commitment and limited travel; a broad visual arc does not make every attack a guaranteed hit or authorize unrestricted spinning.
 
@@ -303,12 +305,12 @@ Use irregular dark outlines, broad painted material highlights, earthy surroundi
 
 ### Knight appearance
 
-Move away from the block-shaped stand-in toward a complete, human-proportioned armored figure. The final character needs an anatomically coherent, fully articulated body: pelvis, multiple spine joints, neck/head, clavicles/shoulders, upper arms, elbows, forearm twist, wrists, hands and grip-capable fingers, hips, knees, ankles, and feet/toes. Separate torso and pelvis motion, natural joint limits, and coordinated two-handed grip must support deep windups and follow-through without stretching limbs or restricting poses. Armor and cloth must accommodate these joints rather than locking them together. Human proportions and articulation do not change the concealed identity or illustrated visual style.
+Move away from the block-shaped stand-in toward a complete, human-proportioned armored figure. The final character needs an anatomically coherent, fully articulated body: pelvis, multiple spine joints, neck/head, clavicles/shoulders, upper arms, elbows, forearm twist, wrists, hands and grip-capable fingers, hips, knees, ankles, and feet/toes. Separate torso and pelvis motion, natural joint limits, and coordinated sword-hand and free-arm motion must support deep windups and follow-through without stretching limbs or restricting poses. Armor and cloth must accommodate these joints rather than locking them together. Human proportions and articulation do not change the concealed identity or illustrated visual style.
 
 The current sample replaces the old broad geometric actor with a native skinned human rig, fitted armor, articulated hands/feet, low carry and regripping, and representative connected poses. Production-quality acceptance, authored clip cleanup, final material painting, and the full animation library remain dependent on visual review. See CHARACTER_QUALITY.md.
 
 - Fully enclosed, with no visible skin or identity.
-- Belgian armet as requested; pitch-black eye slit with no visible eyes or glow. A precise visual reference for the helmet is still needed before asset production.
+- Belgian armet as requested; pitch-black eye slit with no visible eyes or glow. The user-supplied assets/reference/knight-red-heraldry-reference.png now defines the intended helmet/armor shape direction; match its enclosed cheek/chin, pointed crest and swept eye opening while retaining our bat heraldry and illustrated finish. Historical naming accuracy is not established by this reference.
 - Silver plate: chestplate, shoulder pauldrons, arm protection, bracers, articulated gauntlets, thigh and knee protection, greaves, and armored boots.
 - Chainmail underneath and at joints, extending into a long robe-like skirt with a divided hem for movement.
 - Red heraldic cloth over the torso armor and part of the mail skirt; no cape.
@@ -321,9 +323,9 @@ A large black bat on the red surcoat: flared, raised wings spanning the chest, p
 
 ### Sword and demeanor
 
-A two-handed longsword with a straight, double-edged silver blade, pointed tip, simple crossguard, and dark leather grip.
+A resized single-handed sword with a straight, double-edged silver blade, pointed tip, simple crossguard, and dark leather grip.
 
-The knight is silent, controlled, and practiced. Both hands hold the sword ready in combat, with measured breathing and minimal flourishes. Outside combat, the blade lowers while the knight remains alert.
+The knight is silent, controlled, and practiced. The right hand wields the resized sword, with measured breathing and minimal flourishes; the left arm remains free to balance and react. One-handed travel/carry animations remain subject to visual review.
 
 ### Combat effects and gore
 
@@ -453,13 +455,13 @@ Enemies maintain a loose, adaptive surround using available gaps, different appr
 
 Enemy defense depletion produces a localized white blade-contact flash and sparks, a sharp metallic crack, pronounced sword/torso recoil, and a shattering defense-bar response. A provisional 0.08-second real-time impact freeze holds the entire fight, including the break/reward timers. Input is discarded during the freeze; held inputs require release before reuse. Multiple contacts do not stack or extend an existing freeze, and punishment hits do not retrigger it. A player guard break uses distinct player feedback without awarding an enemy-break celebration.
 
-Human proportions, a fully articulated rig, and polished full-body animation remain core requirements. Prove a rigged character with a small polished movement/attack/defense sample before building finishers and the full animation library. Mechanics prototypes do not count as finished character assets. The running carry remains the proposed low, backward-angled carry pending final pose review.
+Human proportions, a fully articulated rig, and polished full-body animation remain core requirements. Prove a rigged character with a small polished movement/attack/defense sample before building finishers and the full animation library. Mechanics prototypes do not count as finished character assets. The current weapon direction is single-handed: resize the supplied sword to suit the knight and keep the left arm free. This supersedes the earlier two-handed shoulder carry; final pose quality remains subject to review.
 
 ## Character-quality target approved — 2026-11-18
 
 Use believable human proportions with modest armor exaggeration for readability. Ghost of Tsushima is the anatomy/movement reference; Chivalry 2 is the armor reference, adapted to the established silver/red Belgian-armet knight, mail skirt, leather fittings, black visor slit, and bat heraldry. Rendering remains our own clean ink contours, broad painted shading, and restrained surface texture. These references do not authorize importing their assets.
 
-The longsword feels agile; strength comes from planted feet, weight transfer, and coordinated hips/spine/shoulders/hands. Motion is flowing, calculated, forceful, and clean. Swift controlled dodges preserve balance. Outside combat, carry the sword low beside the body, angled backward with floor clearance, then regrip smoothly into two-handed guard.
+The sword feels agile; strength comes from planted feet, weight transfer, and coordinated hips/spine/shoulders/hands. Motion is flowing, calculated, forceful, and clean. Swift controlled dodges preserve balance. Use single-handed sword animations, with the right hand on the handle and the left arm free. The earlier two-handed shoulder carry is retained only in archived comparison studies; choose and review a matching single-handed travel pose before gameplay migration.
 
 Occasional stylish backspin-to-strike executions are now approved. They remain authored variants within an existing attack: identical preparation/active/recovery timing, commitment, reach, collision rules, and damage. Rotate the body through the flourish without rotating the gameplay camera or granting an extra hit, movement, or invulnerability. Ordinary execution remains more common; no every-strike spinning or uncontrolled recovery.
 

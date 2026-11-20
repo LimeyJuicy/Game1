@@ -6,7 +6,7 @@ test('Quaternius authored legs animate with frozen upper locals and remain selec
   const errors: string[] = [];
   page.on('pageerror', error => errors.push(error.message));
   page.on('console', message => { if (message.type() === 'error') errors.push(message.text()); });
-  await page.goto('/?body=legs');
+  await page.goto('/?mode=animation&body=legs');
   await expect(page.locator('#stats')).toContainText('43 clips');
   await expect(page.locator('#clip')).toHaveValue('lower:Walk_Loop');
   await expect(page.locator('#source-status')).toContainText('Sprint enter/exit are absent');

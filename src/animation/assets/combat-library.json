@@ -1,0 +1,1614 @@
+{
+  "schemaVersion": 1,
+  "actions": [
+    {
+      "id": "light-1",
+      "name": "Light cut 1",
+      "category": "Light attacks",
+      "source": "sword_light_a",
+      "engine": "upper",
+      "preparation": 0.5,
+      "playback": 0.367,
+      "recovery": 0.65,
+      "settle": 0.3,
+      "status": "adapted-for-review",
+      "stepDepth": 0.35,
+      "roles": [
+        "light-source-1"
+      ],
+      "credit": {
+        "text": "Universal Animation Library 2 by Quaternius \u2014 CC0 1.0",
+        "url": "https://kinemiq.app/animations/?a=k%3Asword_light_a"
+      }
+    },
+    {
+      "id": "light-2",
+      "name": "Light cut 2",
+      "category": "Light attacks",
+      "source": "sword_light_b",
+      "engine": "upper",
+      "preparation": 0.35,
+      "playback": 0.433,
+      "recovery": 0.48,
+      "settle": 0.12,
+      "status": "adapted-for-review",
+      "stepDepth": 0.25,
+      "roles": [
+        "light-source-2"
+      ],
+      "credit": {
+        "text": "Universal Animation Library 2 by Quaternius \u2014 CC0 1.0",
+        "url": "https://kinemiq.app/animations/?a=k%3Asword_light_b"
+      }
+    },
+    {
+      "id": "light-3",
+      "name": "Light cut 3",
+      "category": "Light attacks",
+      "source": "sword_light_c",
+      "engine": "upper",
+      "preparation": 0.35,
+      "playback": 0.65,
+      "recovery": 0.48,
+      "settle": 0.12,
+      "status": "adapted-for-review",
+      "stepDepth": 0.25,
+      "roles": [
+        "light-source-3"
+      ],
+      "credit": {
+        "text": "Universal Animation Library 2 by Quaternius \u2014 CC0 1.0",
+        "url": "https://kinemiq.app/animations/?a=k%3Asword_light_c"
+      }
+    },
+    {
+      "id": "light-4",
+      "name": "Light cut 4",
+      "category": "Light attacks",
+      "source": "sword_regular_a",
+      "engine": "upper",
+      "preparation": 0.35,
+      "playback": 0.433,
+      "recovery": 0.48,
+      "settle": 0.12,
+      "status": "adapted-for-review",
+      "stepDepth": 0.25,
+      "roles": [
+        "light-source-4"
+      ],
+      "credit": {
+        "text": "Universal Animation Library - Quaternius \u2014 CC0 1.0",
+        "url": "https://kinemiq.app/animations/?a=k%3Asword_regular_a"
+      }
+    },
+    {
+      "id": "light-5",
+      "name": "Light cut 5",
+      "category": "Light attacks",
+      "source": "sword_regular_b",
+      "engine": "upper",
+      "preparation": 0.35,
+      "playback": 0.533,
+      "recovery": 0.48,
+      "settle": 0.12,
+      "status": "adapted-for-review",
+      "stepDepth": 0.25,
+      "roles": [
+        "light-source-5"
+      ],
+      "credit": {
+        "text": "Universal Animation Library - Quaternius \u2014 CC0 1.0",
+        "url": "https://kinemiq.app/animations/?a=k%3Asword_regular_b"
+      }
+    },
+    {
+      "id": "light-6",
+      "name": "Light cut 6",
+      "category": "Light attacks",
+      "source": "sword_uppercut",
+      "engine": "upper",
+      "preparation": 0.35,
+      "playback": 0.65,
+      "recovery": 0.48,
+      "settle": 0.12,
+      "status": "adapted-for-review",
+      "stepDepth": 0.25,
+      "roles": [
+        "light-source-6"
+      ],
+      "credit": {
+        "text": "Universal Animation Library 2 by Quaternius \u2014 CC0 1.0",
+        "url": "https://kinemiq.app/animations/?a=k%3Asword_uppercut"
+      }
+    },
+    {
+      "id": "heavy-1",
+      "name": "Heavy cut 1",
+      "category": "Heavy attacks",
+      "source": "sword_heavy_a",
+      "engine": "upper",
+      "preparation": 0.45,
+      "playback": 0.733,
+      "recovery": 0.6,
+      "settle": 0.12,
+      "status": "adapted-for-review",
+      "stepDepth": 0.45,
+      "roles": [
+        "heavy-source-1"
+      ],
+      "credit": {
+        "text": "Universal Animation Library 2 by Quaternius \u2014 CC0 1.0",
+        "url": "https://kinemiq.app/animations/?a=k%3Asword_heavy_a"
+      }
+    },
+    {
+      "id": "heavy-2",
+      "name": "Heavy cut 2",
+      "category": "Heavy attacks",
+      "source": "sword_heavy_b",
+      "engine": "upper",
+      "preparation": 0.45,
+      "playback": 0.5,
+      "recovery": 0.6,
+      "settle": 0.12,
+      "status": "adapted-for-review",
+      "stepDepth": 0.45,
+      "roles": [
+        "heavy-source-2"
+      ],
+      "credit": {
+        "text": "Universal Animation Library 2 by Quaternius \u2014 CC0 1.0",
+        "url": "https://kinemiq.app/animations/?a=k%3Asword_heavy_b"
+      }
+    },
+    {
+      "id": "heavy-3",
+      "name": "Heavy cut 3",
+      "category": "Heavy attacks",
+      "source": "sword_heavy_c",
+      "engine": "upper",
+      "preparation": 0.45,
+      "playback": 0.7,
+      "recovery": 0.6,
+      "settle": 0.12,
+      "status": "adapted-for-review",
+      "stepDepth": 0.45,
+      "roles": [
+        "heavy-source-3"
+      ],
+      "credit": {
+        "text": "Universal Animation Library 2 by Quaternius \u2014 CC0 1.0",
+        "url": "https://kinemiq.app/animations/?a=k%3Asword_heavy_c"
+      }
+    },
+    {
+      "id": "guard",
+      "name": "Combat ready",
+      "category": "Guards and defense",
+      "source": "sword_idle",
+      "engine": "footwork",
+      "preparation": 0.22,
+      "playback": 2.5,
+      "recovery": 0.35,
+      "settle": 0.12,
+      "status": "adapted-for-review",
+      "movement": "idle",
+      "roles": [
+        "combat-idle"
+      ],
+      "credit": {
+        "text": "Universal Animation Library - Quaternius \u2014 CC0 1.0",
+        "url": "https://kinemiq.app/animations/?a=k%3Asword_idle"
+      }
+    },
+    {
+      "id": "high-guard",
+      "name": "High sword guard",
+      "category": "Guards and defense",
+      "source": "sword_light_a",
+      "engine": "upper",
+      "preparation": 0.22,
+      "playback": 1.1,
+      "recovery": 0.35,
+      "settle": 0.12,
+      "status": "adapted-for-review",
+      "holdPose": 0.4,
+      "roles": [
+        "high-guard"
+      ],
+      "credit": {
+        "text": "Universal Animation Library 2 by Quaternius \u2014 CC0 1.0",
+        "url": "https://kinemiq.app/animations/?a=k%3Asword_light_a"
+      }
+    },
+    {
+      "id": "block-hold",
+      "name": "Held sword block",
+      "category": "Guards and defense",
+      "source": "sword_block",
+      "engine": "upper",
+      "preparation": 0.22,
+      "playback": 1.2,
+      "recovery": 0.35,
+      "settle": 0.12,
+      "status": "adapted-for-review",
+      "holdPose": 0.08,
+      "roles": [
+        "held-block"
+      ],
+      "credit": {
+        "text": "Universal Animation Library - Quaternius \u2014 CC0 1.0",
+        "url": "https://kinemiq.app/animations/?a=k%3Asword_block"
+      }
+    },
+    {
+      "id": "parry",
+      "name": "Parry and redirect",
+      "category": "Guards and defense",
+      "source": "sword_block",
+      "engine": "upper",
+      "preparation": 0.1,
+      "playback": 0.3,
+      "recovery": 0.25,
+      "settle": 0.12,
+      "status": "adapted-for-review",
+      "sourceFrom": 0,
+      "sourceTo": 0.33,
+      "roles": [
+        "normal-parry",
+        "perfect-parry"
+      ],
+      "credit": {
+        "text": "Universal Animation Library - Quaternius \u2014 CC0 1.0",
+        "url": "https://kinemiq.app/animations/?a=k%3Asword_block"
+      }
+    },
+    {
+      "id": "block-recoil",
+      "name": "Block recoil",
+      "category": "Guards and defense",
+      "source": "sword_block",
+      "engine": "upper",
+      "preparation": 0.08,
+      "playback": 0.35,
+      "recovery": 0.35,
+      "settle": 0.12,
+      "status": "adapted-for-review",
+      "sourceFrom": 0.03,
+      "sourceTo": 0.7,
+      "roles": [
+        "blocked-impact"
+      ],
+      "credit": {
+        "text": "Universal Animation Library - Quaternius \u2014 CC0 1.0",
+        "url": "https://kinemiq.app/animations/?a=k%3Asword_block"
+      }
+    },
+    {
+      "id": "defense-break",
+      "name": "Defense break / stagger",
+      "category": "Reactions",
+      "source": "community_c3",
+      "engine": "upper",
+      "preparation": 0.18,
+      "playback": 0.7,
+      "recovery": 0.6,
+      "settle": 0.12,
+      "status": "adapted-for-review",
+      "holdPose": 0.45,
+      "roles": [
+        "defense-break",
+        "stunned-idle"
+      ],
+      "credit": {
+        "text": "Acco404 \u2014 CC0 1.0",
+        "url": "https://kinemiq.app/animations/?a=c3"
+      }
+    },
+    {
+      "id": "feint",
+      "name": "Feint and withdraw",
+      "category": "Attack transitions",
+      "source": "sword_light_a",
+      "engine": "upper",
+      "preparation": 0.22,
+      "playback": 0.2,
+      "recovery": 0.3,
+      "settle": 0.12,
+      "status": "adapted-for-review",
+      "sourceFrom": 0,
+      "sourceTo": 0.3,
+      "roles": [
+        "feint"
+      ],
+      "credit": {
+        "text": "Universal Animation Library 2 by Quaternius \u2014 CC0 1.0",
+        "url": "https://kinemiq.app/animations/?a=k%3Asword_light_a"
+      }
+    },
+    {
+      "id": "riposte",
+      "name": "Dash counter strike",
+      "category": "Attack transitions",
+      "source": "sword_dash",
+      "engine": "full",
+      "preparation": 0.12,
+      "playback": 0.75,
+      "recovery": 0.35,
+      "settle": 0.12,
+      "status": "adapted-for-review",
+      "travelScale": 0.28,
+      "roles": [
+        "riposte-animation"
+      ],
+      "note": "Animation candidate only: guaranteed reach, target routing and defense break still belong to gameplay.",
+      "credit": {
+        "text": "Universal Animation Library - Quaternius \u2014 CC0 1.0",
+        "url": "https://kinemiq.app/animations/?a=k%3Asword_dash"
+      }
+    },
+    {
+      "id": "advance",
+      "name": "Advance",
+      "category": "Combat footwork",
+      "source": "sword_idle",
+      "engine": "footwork",
+      "preparation": 0.22,
+      "playback": 1.5,
+      "recovery": 0.35,
+      "settle": 0.12,
+      "status": "adapted-for-review",
+      "movement": "walk",
+      "direction": [
+        0,
+        -1
+      ],
+      "roles": [
+        "advance"
+      ],
+      "credit": {
+        "text": "Universal Animation Library - Quaternius \u2014 CC0 1.0",
+        "url": "https://kinemiq.app/animations/?a=k%3Asword_idle"
+      }
+    },
+    {
+      "id": "retreat",
+      "name": "Retreat",
+      "category": "Combat footwork",
+      "source": "sword_idle",
+      "engine": "footwork",
+      "preparation": 0.22,
+      "playback": 1.5,
+      "recovery": 0.35,
+      "settle": 0.12,
+      "status": "adapted-for-review",
+      "movement": "walk",
+      "direction": [
+        0,
+        1
+      ],
+      "roles": [
+        "retreat"
+      ],
+      "credit": {
+        "text": "Universal Animation Library - Quaternius \u2014 CC0 1.0",
+        "url": "https://kinemiq.app/animations/?a=k%3Asword_idle"
+      }
+    },
+    {
+      "id": "strafe-left",
+      "name": "Step left",
+      "category": "Combat footwork",
+      "source": "sword_idle",
+      "engine": "footwork",
+      "preparation": 0.22,
+      "playback": 1.5,
+      "recovery": 0.35,
+      "settle": 0.12,
+      "status": "adapted-for-review",
+      "movement": "walk",
+      "direction": [
+        -1,
+        0
+      ],
+      "roles": [
+        "strafe-left"
+      ],
+      "credit": {
+        "text": "Universal Animation Library - Quaternius \u2014 CC0 1.0",
+        "url": "https://kinemiq.app/animations/?a=k%3Asword_idle"
+      }
+    },
+    {
+      "id": "strafe-right",
+      "name": "Step right",
+      "category": "Combat footwork",
+      "source": "sword_idle",
+      "engine": "footwork",
+      "preparation": 0.22,
+      "playback": 1.5,
+      "recovery": 0.35,
+      "settle": 0.12,
+      "status": "adapted-for-review",
+      "movement": "walk",
+      "direction": [
+        1,
+        0
+      ],
+      "roles": [
+        "strafe-right"
+      ],
+      "credit": {
+        "text": "Universal Animation Library - Quaternius \u2014 CC0 1.0",
+        "url": "https://kinemiq.app/animations/?a=k%3Asword_idle"
+      }
+    },
+    {
+      "id": "dodge-forward",
+      "name": "Forward controlled dodge",
+      "category": "Dodges and rolls",
+      "source": "sword_idle",
+      "engine": "footwork",
+      "preparation": 0.08,
+      "playback": 0.5,
+      "recovery": 0.2,
+      "settle": 0.12,
+      "status": "adapted-for-review",
+      "movement": "evade",
+      "direction": [
+        0,
+        -1
+      ],
+      "roles": [
+        "dodge-forward"
+      ],
+      "note": "PR controlled step; invulnerability and perfect-defense slow motion remain gameplay.",
+      "credit": {
+        "text": "Universal Animation Library - Quaternius \u2014 CC0 1.0",
+        "url": "https://kinemiq.app/animations/?a=k%3Asword_idle"
+      },
+      "footworkSpeed": 1.65
+    },
+    {
+      "id": "dodge-backward",
+      "name": "Backward controlled dodge",
+      "category": "Dodges and rolls",
+      "source": "sword_idle",
+      "engine": "footwork",
+      "preparation": 0.08,
+      "playback": 0.5,
+      "recovery": 0.2,
+      "settle": 0.12,
+      "status": "adapted-for-review",
+      "movement": "evade",
+      "direction": [
+        0,
+        1
+      ],
+      "roles": [
+        "dodge-backward"
+      ],
+      "note": "PR controlled step; invulnerability and perfect-defense slow motion remain gameplay.",
+      "credit": {
+        "text": "Universal Animation Library - Quaternius \u2014 CC0 1.0",
+        "url": "https://kinemiq.app/animations/?a=k%3Asword_idle"
+      },
+      "footworkSpeed": 1.65
+    },
+    {
+      "id": "dodge-left",
+      "name": "Left controlled dodge",
+      "category": "Dodges and rolls",
+      "source": "sword_idle",
+      "engine": "footwork",
+      "preparation": 0.08,
+      "playback": 0.5,
+      "recovery": 0.2,
+      "settle": 0.12,
+      "status": "adapted-for-review",
+      "movement": "evade",
+      "direction": [
+        -1,
+        0
+      ],
+      "roles": [
+        "dodge-left"
+      ],
+      "note": "PR controlled step; invulnerability and perfect-defense slow motion remain gameplay.",
+      "credit": {
+        "text": "Universal Animation Library - Quaternius \u2014 CC0 1.0",
+        "url": "https://kinemiq.app/animations/?a=k%3Asword_idle"
+      },
+      "footworkSpeed": 1.65
+    },
+    {
+      "id": "dodge-right",
+      "name": "Right controlled dodge",
+      "category": "Dodges and rolls",
+      "source": "sword_idle",
+      "engine": "footwork",
+      "preparation": 0.08,
+      "playback": 0.5,
+      "recovery": 0.2,
+      "settle": 0.12,
+      "status": "adapted-for-review",
+      "movement": "evade",
+      "direction": [
+        1,
+        0
+      ],
+      "roles": [
+        "dodge-right"
+      ],
+      "note": "PR controlled step; invulnerability and perfect-defense slow motion remain gameplay.",
+      "credit": {
+        "text": "Universal Animation Library - Quaternius \u2014 CC0 1.0",
+        "url": "https://kinemiq.app/animations/?a=k%3Asword_idle"
+      },
+      "footworkSpeed": 1.65
+    },
+    {
+      "id": "roll-forward",
+      "name": "Roll forward",
+      "category": "Dodges and rolls",
+      "source": "roll",
+      "engine": "full",
+      "preparation": 0.18,
+      "playback": 0.8,
+      "recovery": 0.3,
+      "settle": 0.12,
+      "status": "adapted-for-review",
+      "heading": 0,
+      "travelScale": 0.28,
+      "roles": [
+        "roll-forward"
+      ],
+      "note": "Forward-roll source steered through a turn; side/back versions are turn-and-roll adaptations, not unique authored tumbles.",
+      "credit": {
+        "text": "Universal Animation Library - Quaternius \u2014 CC0 1.0",
+        "url": "https://kinemiq.app/animations/?a=k%3Aroll"
+      },
+      "bodySupport": true
+    },
+    {
+      "id": "roll-backward",
+      "name": "Roll backward",
+      "category": "Dodges and rolls",
+      "source": "roll",
+      "engine": "full",
+      "preparation": 0.18,
+      "playback": 0.8,
+      "recovery": 0.3,
+      "settle": 0.12,
+      "status": "adapted-for-review",
+      "heading": 180,
+      "travelScale": 0.28,
+      "roles": [
+        "roll-backward"
+      ],
+      "note": "Forward-roll source steered through a turn; side/back versions are turn-and-roll adaptations, not unique authored tumbles.",
+      "credit": {
+        "text": "Universal Animation Library - Quaternius \u2014 CC0 1.0",
+        "url": "https://kinemiq.app/animations/?a=k%3Aroll"
+      },
+      "bodySupport": true
+    },
+    {
+      "id": "roll-left",
+      "name": "Roll left",
+      "category": "Dodges and rolls",
+      "source": "roll",
+      "engine": "full",
+      "preparation": 0.18,
+      "playback": 0.8,
+      "recovery": 0.3,
+      "settle": 0.12,
+      "status": "adapted-for-review",
+      "heading": 90,
+      "travelScale": 0.28,
+      "roles": [
+        "roll-left"
+      ],
+      "note": "Forward-roll source steered through a turn; side/back versions are turn-and-roll adaptations, not unique authored tumbles.",
+      "credit": {
+        "text": "Universal Animation Library - Quaternius \u2014 CC0 1.0",
+        "url": "https://kinemiq.app/animations/?a=k%3Aroll"
+      },
+      "bodySupport": true
+    },
+    {
+      "id": "roll-right",
+      "name": "Roll right",
+      "category": "Dodges and rolls",
+      "source": "roll",
+      "engine": "full",
+      "preparation": 0.18,
+      "playback": 0.8,
+      "recovery": 0.3,
+      "settle": 0.12,
+      "status": "adapted-for-review",
+      "heading": -90,
+      "travelScale": 0.28,
+      "roles": [
+        "roll-right"
+      ],
+      "note": "Forward-roll source steered through a turn; side/back versions are turn-and-roll adaptations, not unique authored tumbles.",
+      "credit": {
+        "text": "Universal Animation Library - Quaternius \u2014 CC0 1.0",
+        "url": "https://kinemiq.app/animations/?a=k%3Aroll"
+      },
+      "bodySupport": true
+    },
+    {
+      "id": "walk",
+      "name": "Travel walk",
+      "category": "Travel",
+      "source": "native:Walk_Loop",
+      "engine": "full",
+      "preparation": 0.25,
+      "playback": 2.3666667460000004,
+      "recovery": 0.35,
+      "settle": 0.12,
+      "status": "adapted-for-review",
+      "velocity": [
+        0,
+        -1.1
+      ],
+      "cycles": 2,
+      "roles": [
+        "walk"
+      ],
+      "note": "Authored gait with fitted proportions. Entry/braking blends are review candidates; live movement integration remains separate. Single-handed carry angle is a review candidate.",
+      "credit": {
+        "text": "Universal Animation Library \u2014 Quaternius \u2014 CC0 1.0",
+        "url": "https://quaternius.itch.io/universal-animation-library"
+      }
+    },
+    {
+      "id": "jog",
+      "name": "Jog",
+      "category": "Travel",
+      "source": "native:Jog_Fwd_Loop",
+      "engine": "full",
+      "preparation": 0.25,
+      "playback": 1.566666674,
+      "recovery": 0.35,
+      "settle": 0.12,
+      "status": "adapted-for-review",
+      "velocity": [
+        0,
+        -2
+      ],
+      "cycles": 2,
+      "roles": [
+        "jog"
+      ],
+      "note": "Authored gait with fitted proportions. Entry/braking blends are review candidates; live movement integration remains separate. Single-handed carry angle is a review candidate.",
+      "credit": {
+        "text": "Universal Animation Library \u2014 Quaternius \u2014 CC0 1.0",
+        "url": "https://quaternius.itch.io/universal-animation-library"
+      }
+    },
+    {
+      "id": "sprint",
+      "name": "Sprint",
+      "category": "Travel",
+      "source": "native:Sprint_Loop",
+      "engine": "full",
+      "preparation": 0.25,
+      "playback": 1.033333374,
+      "recovery": 0.35,
+      "settle": 0.12,
+      "status": "adapted-for-review",
+      "velocity": [
+        0,
+        -3.6
+      ],
+      "cycles": 2,
+      "roles": [
+        "sprint"
+      ],
+      "note": "Authored gait with fitted proportions. Entry/braking blends are review candidates; live movement integration remains separate. Single-handed carry angle is a review candidate.",
+      "credit": {
+        "text": "Universal Animation Library \u2014 Quaternius \u2014 CC0 1.0",
+        "url": "https://quaternius.itch.io/universal-animation-library"
+      }
+    },
+    {
+      "id": "sprint-enter",
+      "name": "Accelerate into sprint",
+      "category": "Travel",
+      "source": "native:Sprint_Loop",
+      "engine": "full",
+      "preparation": 0.45,
+      "playback": 1.033333374,
+      "recovery": 0.15,
+      "settle": 0.12,
+      "status": "adapted-for-review",
+      "velocity": [
+        0,
+        -3.6
+      ],
+      "roles": [
+        "sprint-entry"
+      ],
+      "note": "Blended entry into the authored sprint, not a new dedicated source clip. Single-handed carry angle is a review candidate.",
+      "credit": {
+        "text": "Universal Animation Library \u2014 Quaternius \u2014 CC0 1.0",
+        "url": "https://quaternius.itch.io/universal-animation-library"
+      },
+      "cycles": 2
+    },
+    {
+      "id": "sprint-exit",
+      "name": "Brake from sprint",
+      "category": "Travel",
+      "source": "native:Sprint_Loop",
+      "engine": "full",
+      "preparation": 0.15,
+      "playback": 1.008333374,
+      "recovery": 0.5,
+      "settle": 0.12,
+      "status": "adapted-for-review",
+      "velocity": [
+        0,
+        -3.6
+      ],
+      "roles": [
+        "sprint-exit"
+      ],
+      "note": "Blended braking candidate; foot-contact polish is still required. Single-handed carry angle is a review candidate.",
+      "credit": {
+        "text": "Universal Animation Library \u2014 Quaternius \u2014 CC0 1.0",
+        "url": "https://quaternius.itch.io/universal-animation-library"
+      },
+      "cycles": 2
+    },
+    {
+      "id": "hit-chest",
+      "name": "Chest hit",
+      "category": "Reactions",
+      "source": "hit_chest",
+      "engine": "upper",
+      "preparation": 0.06,
+      "playback": 0.35,
+      "recovery": 0.3,
+      "settle": 0.12,
+      "status": "adapted-for-review",
+      "roles": [
+        "hit-chest"
+      ],
+      "credit": {
+        "text": "Universal Animation Library - Quaternius \u2014 CC0 1.0",
+        "url": "https://kinemiq.app/animations/?a=k%3Ahit_chest"
+      }
+    },
+    {
+      "id": "hit-head",
+      "name": "Head hit",
+      "category": "Reactions",
+      "source": "hit_head",
+      "engine": "upper",
+      "preparation": 0.06,
+      "playback": 0.35,
+      "recovery": 0.3,
+      "settle": 0.12,
+      "status": "adapted-for-review",
+      "roles": [
+        "hit-head"
+      ],
+      "credit": {
+        "text": "Universal Animation Library - Quaternius \u2014 CC0 1.0",
+        "url": "https://kinemiq.app/animations/?a=k%3Ahit_head"
+      }
+    },
+    {
+      "id": "knockback",
+      "name": "Knockback and regain balance",
+      "category": "Reactions",
+      "source": "community_c6",
+      "engine": "full",
+      "preparation": 0.06,
+      "playback": 1.1,
+      "recovery": 0.45,
+      "settle": 0.12,
+      "status": "adapted-for-review",
+      "travelScale": 0.7,
+      "roles": [
+        "heavy-hit",
+        "knockback"
+      ],
+      "credit": {
+        "text": "felipe gabriel \u2014 CC BY 4.0; Open Motion Project by ACCAD / The Ohio State University \u2014 CC BY 3.0",
+        "url": "https://kinemiq.app/animations/?a=c6"
+      },
+      "sourceFrom": 0.02,
+      "sourceTo": 0.82,
+      "note": "Grounded knockback/recovery adaptation from the community clip. Contact and live interruption handoff still need review."
+    },
+    {
+      "id": "get-up",
+      "name": "Get up from the ground",
+      "category": "Reactions",
+      "source": "laytoidle",
+      "engine": "full",
+      "preparation": 0,
+      "playback": 1.5,
+      "recovery": 0,
+      "settle": 0.12,
+      "status": "adapted-for-review",
+      "terminal": true,
+      "roles": [
+        "get-up"
+      ],
+      "note": "Starts on the ground. A matching knockdown-to-recovery handoff is not yet authored.",
+      "credit": {
+        "text": "Universal Animation Library - Quaternius \u2014 CC0 1.0",
+        "url": "https://kinemiq.app/animations/?a=k%3Alaytoidle"
+      },
+      "bodySupport": true
+    },
+    {
+      "id": "death",
+      "name": "Fall backward / death",
+      "category": "Reactions",
+      "source": "death01",
+      "engine": "full",
+      "preparation": 0.05,
+      "playback": 2.4,
+      "recovery": 0,
+      "settle": 0.12,
+      "status": "adapted-for-review",
+      "terminal": true,
+      "roles": [
+        "death"
+      ],
+      "note": "Corpse pose is held. Sword-drop handoff and gore are separate systems.",
+      "credit": {
+        "text": "Universal Animation Library - Quaternius \u2014 CC0 1.0",
+        "url": "https://kinemiq.app/animations/?a=k%3Adeath01"
+      },
+      "bodySupport": true
+    },
+    {
+      "id": "kick",
+      "name": "Enemy unblockable front kick",
+      "category": "Enemy actions",
+      "source": "male2_g2_frontkick",
+      "engine": "full",
+      "preparation": 0.12,
+      "playback": 0.8,
+      "recovery": 0.4,
+      "settle": 0.12,
+      "status": "adapted-for-review",
+      "sourceFrom": 0.12,
+      "sourceTo": 0.6,
+      "travelScale": 0.5,
+      "roles": [
+        "enemy-unblockable-kick"
+      ],
+      "note": "Full-body kick candidate with authored support leg; no red-star or damage changes in this preview.",
+      "credit": {
+        "text": "Open Motion Project by ACCAD / The Ohio State University \u2014 CC BY 3.0",
+        "url": "https://kinemiq.app/animations/?a=k%3Amale2_g2_frontkick"
+      }
+    },
+    {
+      "id": "taunt",
+      "name": "Enemy taunt",
+      "category": "Enemy actions",
+      "source": "male2_d11_readytotaunt1toready",
+      "engine": "upper",
+      "preparation": 0.22,
+      "playback": 2,
+      "recovery": 0.35,
+      "settle": 0.12,
+      "status": "adapted-for-review",
+      "roles": [
+        "enemy-taunt"
+      ],
+      "credit": {
+        "text": "Open Motion Project by ACCAD / The Ohio State University \u2014 CC BY 3.0",
+        "url": "https://kinemiq.app/animations/?a=k%3Amale2_d11_readytotaunt1toready"
+      }
+    },
+    {
+      "id": "victory",
+      "name": "Victory salute",
+      "category": "Reactions",
+      "source": "sword_light_a",
+      "engine": "upper",
+      "preparation": 0.35,
+      "playback": 1.0,
+      "recovery": 0.4,
+      "settle": 0.12,
+      "status": "adapted-for-review",
+      "roles": [
+        "round-victory"
+      ],
+      "credit": {
+        "text": "Universal Animation Library 2 by Quaternius \u2014 CC0 1.0",
+        "url": "https://kinemiq.app/animations/?a=k%3Asword_light_a"
+      },
+      "holdPose": 0.4,
+      "note": "A restrained raise-and-lower sword salute, using an authored high pose rather than a sped-up celebration."
+    },
+    {
+      "id": "light-recovery-a",
+      "name": "Light recovery A",
+      "category": "Recoveries",
+      "source": "sword_light_a_rec",
+      "engine": "upper",
+      "preparation": 0.12,
+      "playback": 0.5,
+      "recovery": 0.3,
+      "settle": 0.12,
+      "status": "adapted-for-review",
+      "roles": [
+        "attack-recovery"
+      ],
+      "credit": {
+        "text": "Universal Animation Library 2 by Quaternius \u2014 CC0 1.0",
+        "url": "https://kinemiq.app/animations/?a=k%3Asword_light_a_rec"
+      }
+    },
+    {
+      "id": "light-recovery-b",
+      "name": "Light recovery B",
+      "category": "Recoveries",
+      "source": "sword_light_b_rec",
+      "engine": "upper",
+      "preparation": 0.12,
+      "playback": 0.5,
+      "recovery": 0.3,
+      "settle": 0.12,
+      "status": "adapted-for-review",
+      "roles": [
+        "attack-recovery"
+      ],
+      "credit": {
+        "text": "Universal Animation Library 2 by Quaternius \u2014 CC0 1.0",
+        "url": "https://kinemiq.app/animations/?a=k%3Asword_light_b_rec"
+      }
+    },
+    {
+      "id": "light-recovery-c",
+      "name": "Light recovery C",
+      "category": "Recoveries",
+      "source": "sword_light_c_rec",
+      "engine": "upper",
+      "preparation": 0.12,
+      "playback": 0.5,
+      "recovery": 0.3,
+      "settle": 0.12,
+      "status": "adapted-for-review",
+      "roles": [
+        "attack-recovery"
+      ],
+      "credit": {
+        "text": "Universal Animation Library 2 by Quaternius \u2014 CC0 1.0",
+        "url": "https://kinemiq.app/animations/?a=k%3Asword_light_c_rec"
+      }
+    },
+    {
+      "id": "heavy-recovery-a",
+      "name": "Heavy recovery A",
+      "category": "Recoveries",
+      "source": "sword_heavy_a_rec",
+      "engine": "upper",
+      "preparation": 0.12,
+      "playback": 0.5,
+      "recovery": 0.3,
+      "settle": 0.12,
+      "status": "adapted-for-review",
+      "roles": [
+        "attack-recovery"
+      ],
+      "credit": {
+        "text": "Universal Animation Library 2 by Quaternius \u2014 CC0 1.0",
+        "url": "https://kinemiq.app/animations/?a=k%3Asword_heavy_a_rec"
+      }
+    },
+    {
+      "id": "heavy-recovery-b",
+      "name": "Heavy recovery B",
+      "category": "Recoveries",
+      "source": "sword_heavy_b_rec",
+      "engine": "upper",
+      "preparation": 0.12,
+      "playback": 0.5,
+      "recovery": 0.3,
+      "settle": 0.12,
+      "status": "adapted-for-review",
+      "roles": [
+        "attack-recovery"
+      ],
+      "credit": {
+        "text": "Universal Animation Library 2 by Quaternius \u2014 CC0 1.0",
+        "url": "https://kinemiq.app/animations/?a=k%3Asword_heavy_b_rec"
+      }
+    },
+    {
+      "id": "heavy-recovery-c",
+      "name": "Heavy recovery C",
+      "category": "Recoveries",
+      "source": "sword_heavy_c_rec",
+      "engine": "upper",
+      "preparation": 0.12,
+      "playback": 0.5,
+      "recovery": 0.3,
+      "settle": 0.12,
+      "status": "adapted-for-review",
+      "roles": [
+        "attack-recovery"
+      ],
+      "credit": {
+        "text": "Universal Animation Library 2 by Quaternius \u2014 CC0 1.0",
+        "url": "https://kinemiq.app/animations/?a=k%3Asword_heavy_c_rec"
+      }
+    },
+    {
+      "id": "move-forward-left",
+      "name": "Forward left combat step",
+      "category": "Combat footwork",
+      "source": "sword_idle",
+      "engine": "footwork",
+      "preparation": 0.22,
+      "playback": 1.5,
+      "recovery": 0.35,
+      "settle": 0.12,
+      "status": "adapted-for-review",
+      "movement": "walk",
+      "direction": [
+        -1,
+        -1
+      ],
+      "roles": [
+        "combat-diagonal-forward-left"
+      ],
+      "credit": {
+        "text": "Universal Animation Library - Quaternius \u2014 CC0 1.0",
+        "url": "https://kinemiq.app/animations/?a=k%3Asword_idle"
+      }
+    },
+    {
+      "id": "dodge-forward-left",
+      "name": "Forward left controlled dodge",
+      "category": "Dodges and rolls",
+      "source": "sword_idle",
+      "engine": "footwork",
+      "preparation": 0.08,
+      "playback": 0.5,
+      "recovery": 0.2,
+      "settle": 0.12,
+      "status": "adapted-for-review",
+      "movement": "evade",
+      "direction": [
+        -1,
+        -1
+      ],
+      "roles": [
+        "dodge-diagonal-forward-left"
+      ],
+      "note": "PR controlled step; invulnerability and perfect-defense slow motion remain gameplay.",
+      "credit": {
+        "text": "Universal Animation Library - Quaternius \u2014 CC0 1.0",
+        "url": "https://kinemiq.app/animations/?a=k%3Asword_idle"
+      },
+      "footworkSpeed": 1.65
+    },
+    {
+      "id": "roll-forward-left",
+      "name": "Roll forward left",
+      "category": "Dodges and rolls",
+      "source": "roll",
+      "engine": "full",
+      "preparation": 0.18,
+      "playback": 0.8,
+      "recovery": 0.3,
+      "settle": 0.12,
+      "status": "adapted-for-review",
+      "heading": 45,
+      "travelScale": 0.28,
+      "roles": [
+        "roll-diagonal-forward-left"
+      ],
+      "note": "Forward-roll source steered through a turn; side/back versions are turn-and-roll adaptations, not unique authored tumbles.",
+      "credit": {
+        "text": "Universal Animation Library - Quaternius \u2014 CC0 1.0",
+        "url": "https://kinemiq.app/animations/?a=k%3Aroll"
+      },
+      "bodySupport": true
+    },
+    {
+      "id": "move-forward-right",
+      "name": "Forward right combat step",
+      "category": "Combat footwork",
+      "source": "sword_idle",
+      "engine": "footwork",
+      "preparation": 0.22,
+      "playback": 1.5,
+      "recovery": 0.35,
+      "settle": 0.12,
+      "status": "adapted-for-review",
+      "movement": "walk",
+      "direction": [
+        1,
+        -1
+      ],
+      "roles": [
+        "combat-diagonal-forward-right"
+      ],
+      "credit": {
+        "text": "Universal Animation Library - Quaternius \u2014 CC0 1.0",
+        "url": "https://kinemiq.app/animations/?a=k%3Asword_idle"
+      }
+    },
+    {
+      "id": "dodge-forward-right",
+      "name": "Forward right controlled dodge",
+      "category": "Dodges and rolls",
+      "source": "sword_idle",
+      "engine": "footwork",
+      "preparation": 0.08,
+      "playback": 0.5,
+      "recovery": 0.2,
+      "settle": 0.12,
+      "status": "adapted-for-review",
+      "movement": "evade",
+      "direction": [
+        1,
+        -1
+      ],
+      "roles": [
+        "dodge-diagonal-forward-right"
+      ],
+      "note": "PR controlled step; invulnerability and perfect-defense slow motion remain gameplay.",
+      "credit": {
+        "text": "Universal Animation Library - Quaternius \u2014 CC0 1.0",
+        "url": "https://kinemiq.app/animations/?a=k%3Asword_idle"
+      },
+      "footworkSpeed": 1.65
+    },
+    {
+      "id": "roll-forward-right",
+      "name": "Roll forward right",
+      "category": "Dodges and rolls",
+      "source": "roll",
+      "engine": "full",
+      "preparation": 0.18,
+      "playback": 0.8,
+      "recovery": 0.3,
+      "settle": 0.12,
+      "status": "adapted-for-review",
+      "heading": -45,
+      "travelScale": 0.28,
+      "roles": [
+        "roll-diagonal-forward-right"
+      ],
+      "note": "Forward-roll source steered through a turn; side/back versions are turn-and-roll adaptations, not unique authored tumbles.",
+      "credit": {
+        "text": "Universal Animation Library - Quaternius \u2014 CC0 1.0",
+        "url": "https://kinemiq.app/animations/?a=k%3Aroll"
+      },
+      "bodySupport": true
+    },
+    {
+      "id": "move-back-left",
+      "name": "Back left combat step",
+      "category": "Combat footwork",
+      "source": "sword_idle",
+      "engine": "footwork",
+      "preparation": 0.22,
+      "playback": 1.5,
+      "recovery": 0.35,
+      "settle": 0.12,
+      "status": "adapted-for-review",
+      "movement": "walk",
+      "direction": [
+        -1,
+        1
+      ],
+      "roles": [
+        "combat-diagonal-back-left"
+      ],
+      "credit": {
+        "text": "Universal Animation Library - Quaternius \u2014 CC0 1.0",
+        "url": "https://kinemiq.app/animations/?a=k%3Asword_idle"
+      }
+    },
+    {
+      "id": "dodge-back-left",
+      "name": "Back left controlled dodge",
+      "category": "Dodges and rolls",
+      "source": "sword_idle",
+      "engine": "footwork",
+      "preparation": 0.08,
+      "playback": 0.5,
+      "recovery": 0.2,
+      "settle": 0.12,
+      "status": "adapted-for-review",
+      "movement": "evade",
+      "direction": [
+        -1,
+        1
+      ],
+      "roles": [
+        "dodge-diagonal-back-left"
+      ],
+      "note": "PR controlled step; invulnerability and perfect-defense slow motion remain gameplay.",
+      "credit": {
+        "text": "Universal Animation Library - Quaternius \u2014 CC0 1.0",
+        "url": "https://kinemiq.app/animations/?a=k%3Asword_idle"
+      },
+      "footworkSpeed": 1.65
+    },
+    {
+      "id": "roll-back-left",
+      "name": "Roll back left",
+      "category": "Dodges and rolls",
+      "source": "roll",
+      "engine": "full",
+      "preparation": 0.18,
+      "playback": 0.8,
+      "recovery": 0.3,
+      "settle": 0.12,
+      "status": "adapted-for-review",
+      "heading": 135,
+      "travelScale": 0.28,
+      "roles": [
+        "roll-diagonal-back-left"
+      ],
+      "note": "Forward-roll source steered through a turn; side/back versions are turn-and-roll adaptations, not unique authored tumbles.",
+      "credit": {
+        "text": "Universal Animation Library - Quaternius \u2014 CC0 1.0",
+        "url": "https://kinemiq.app/animations/?a=k%3Aroll"
+      },
+      "bodySupport": true
+    },
+    {
+      "id": "move-back-right",
+      "name": "Back right combat step",
+      "category": "Combat footwork",
+      "source": "sword_idle",
+      "engine": "footwork",
+      "preparation": 0.22,
+      "playback": 1.5,
+      "recovery": 0.35,
+      "settle": 0.12,
+      "status": "adapted-for-review",
+      "movement": "walk",
+      "direction": [
+        1,
+        1
+      ],
+      "roles": [
+        "combat-diagonal-back-right"
+      ],
+      "credit": {
+        "text": "Universal Animation Library - Quaternius \u2014 CC0 1.0",
+        "url": "https://kinemiq.app/animations/?a=k%3Asword_idle"
+      }
+    },
+    {
+      "id": "dodge-back-right",
+      "name": "Back right controlled dodge",
+      "category": "Dodges and rolls",
+      "source": "sword_idle",
+      "engine": "footwork",
+      "preparation": 0.08,
+      "playback": 0.5,
+      "recovery": 0.2,
+      "settle": 0.12,
+      "status": "adapted-for-review",
+      "movement": "evade",
+      "direction": [
+        1,
+        1
+      ],
+      "roles": [
+        "dodge-diagonal-back-right"
+      ],
+      "note": "PR controlled step; invulnerability and perfect-defense slow motion remain gameplay.",
+      "credit": {
+        "text": "Universal Animation Library - Quaternius \u2014 CC0 1.0",
+        "url": "https://kinemiq.app/animations/?a=k%3Asword_idle"
+      },
+      "footworkSpeed": 1.65
+    },
+    {
+      "id": "roll-back-right",
+      "name": "Roll back right",
+      "category": "Dodges and rolls",
+      "source": "roll",
+      "engine": "full",
+      "preparation": 0.18,
+      "playback": 0.8,
+      "recovery": 0.3,
+      "settle": 0.12,
+      "status": "adapted-for-review",
+      "heading": -135,
+      "travelScale": 0.28,
+      "roles": [
+        "roll-diagonal-back-right"
+      ],
+      "note": "Forward-roll source steered through a turn; side/back versions are turn-and-roll adaptations, not unique authored tumbles.",
+      "credit": {
+        "text": "Universal Animation Library - Quaternius \u2014 CC0 1.0",
+        "url": "https://kinemiq.app/animations/?a=k%3Aroll"
+      },
+      "bodySupport": true
+    },
+    {
+      "id": "guarded-forward",
+      "name": "Guarded forward",
+      "category": "Guarded movement",
+      "source": "sword_block",
+      "engine": "footwork",
+      "preparation": 0.22,
+      "playback": 1.5,
+      "recovery": 0.35,
+      "settle": 0.12,
+      "status": "adapted-for-review",
+      "movement": "walk",
+      "direction": [
+        0,
+        -1
+      ],
+      "roles": [
+        "guarded-move-forward"
+      ],
+      "credit": {
+        "text": "Universal Animation Library - Quaternius \u2014 CC0 1.0",
+        "url": "https://kinemiq.app/animations/?a=k%3Asword_block"
+      },
+      "holdPose": 0.08,
+      "note": "Held sword guard over PR movement. Intercepting a particular blade is still a target/contact integration task."
+    },
+    {
+      "id": "guarded-back",
+      "name": "Guarded back",
+      "category": "Guarded movement",
+      "source": "sword_block",
+      "engine": "footwork",
+      "preparation": 0.22,
+      "playback": 1.5,
+      "recovery": 0.35,
+      "settle": 0.12,
+      "status": "adapted-for-review",
+      "movement": "walk",
+      "direction": [
+        0,
+        1
+      ],
+      "roles": [
+        "guarded-move-back"
+      ],
+      "credit": {
+        "text": "Universal Animation Library - Quaternius \u2014 CC0 1.0",
+        "url": "https://kinemiq.app/animations/?a=k%3Asword_block"
+      },
+      "holdPose": 0.08,
+      "note": "Held sword guard over PR movement. Intercepting a particular blade is still a target/contact integration task."
+    },
+    {
+      "id": "guarded-left",
+      "name": "Guarded left",
+      "category": "Guarded movement",
+      "source": "sword_block",
+      "engine": "footwork",
+      "preparation": 0.22,
+      "playback": 1.5,
+      "recovery": 0.35,
+      "settle": 0.12,
+      "status": "adapted-for-review",
+      "movement": "walk",
+      "direction": [
+        -1,
+        0
+      ],
+      "roles": [
+        "guarded-move-left"
+      ],
+      "credit": {
+        "text": "Universal Animation Library - Quaternius \u2014 CC0 1.0",
+        "url": "https://kinemiq.app/animations/?a=k%3Asword_block"
+      },
+      "holdPose": 0.08,
+      "note": "Held sword guard over PR movement. Intercepting a particular blade is still a target/contact integration task."
+    },
+    {
+      "id": "guarded-right",
+      "name": "Guarded right",
+      "category": "Guarded movement",
+      "source": "sword_block",
+      "engine": "footwork",
+      "preparation": 0.22,
+      "playback": 1.5,
+      "recovery": 0.35,
+      "settle": 0.12,
+      "status": "adapted-for-review",
+      "movement": "walk",
+      "direction": [
+        1,
+        0
+      ],
+      "roles": [
+        "guarded-move-right"
+      ],
+      "credit": {
+        "text": "Universal Animation Library - Quaternius \u2014 CC0 1.0",
+        "url": "https://kinemiq.app/animations/?a=k%3Asword_block"
+      },
+      "holdPose": 0.08,
+      "note": "Held sword guard over PR movement. Intercepting a particular blade is still a target/contact integration task."
+    },
+    {
+      "id": "guarded-forward-left",
+      "name": "Guarded forward left",
+      "category": "Guarded movement",
+      "source": "sword_block",
+      "engine": "footwork",
+      "preparation": 0.22,
+      "playback": 1.5,
+      "recovery": 0.35,
+      "settle": 0.12,
+      "status": "adapted-for-review",
+      "movement": "walk",
+      "direction": [
+        -1,
+        -1
+      ],
+      "roles": [
+        "guarded-move-forward-left"
+      ],
+      "credit": {
+        "text": "Universal Animation Library - Quaternius \u2014 CC0 1.0",
+        "url": "https://kinemiq.app/animations/?a=k%3Asword_block"
+      },
+      "holdPose": 0.08,
+      "note": "Held sword guard over PR movement. Intercepting a particular blade is still a target/contact integration task."
+    },
+    {
+      "id": "guarded-forward-right",
+      "name": "Guarded forward right",
+      "category": "Guarded movement",
+      "source": "sword_block",
+      "engine": "footwork",
+      "preparation": 0.22,
+      "playback": 1.5,
+      "recovery": 0.35,
+      "settle": 0.12,
+      "status": "adapted-for-review",
+      "movement": "walk",
+      "direction": [
+        1,
+        -1
+      ],
+      "roles": [
+        "guarded-move-forward-right"
+      ],
+      "credit": {
+        "text": "Universal Animation Library - Quaternius \u2014 CC0 1.0",
+        "url": "https://kinemiq.app/animations/?a=k%3Asword_block"
+      },
+      "holdPose": 0.08,
+      "note": "Held sword guard over PR movement. Intercepting a particular blade is still a target/contact integration task."
+    },
+    {
+      "id": "guarded-back-left",
+      "name": "Guarded back left",
+      "category": "Guarded movement",
+      "source": "sword_block",
+      "engine": "footwork",
+      "preparation": 0.22,
+      "playback": 1.5,
+      "recovery": 0.35,
+      "settle": 0.12,
+      "status": "adapted-for-review",
+      "movement": "walk",
+      "direction": [
+        -1,
+        1
+      ],
+      "roles": [
+        "guarded-move-back-left"
+      ],
+      "credit": {
+        "text": "Universal Animation Library - Quaternius \u2014 CC0 1.0",
+        "url": "https://kinemiq.app/animations/?a=k%3Asword_block"
+      },
+      "holdPose": 0.08,
+      "note": "Held sword guard over PR movement. Intercepting a particular blade is still a target/contact integration task."
+    },
+    {
+      "id": "guarded-back-right",
+      "name": "Guarded back right",
+      "category": "Guarded movement",
+      "source": "sword_block",
+      "engine": "footwork",
+      "preparation": 0.22,
+      "playback": 1.5,
+      "recovery": 0.35,
+      "settle": 0.12,
+      "status": "adapted-for-review",
+      "movement": "walk",
+      "direction": [
+        1,
+        1
+      ],
+      "roles": [
+        "guarded-move-back-right"
+      ],
+      "credit": {
+        "text": "Universal Animation Library - Quaternius \u2014 CC0 1.0",
+        "url": "https://kinemiq.app/animations/?a=k%3Asword_block"
+      },
+      "holdPose": 0.08,
+      "note": "Held sword guard over PR movement. Intercepting a particular blade is still a target/contact integration task."
+    },
+    {
+      "id": "relaxed-idle",
+      "name": "Relaxed standing",
+      "category": "Travel",
+      "source": "native:Idle_Loop",
+      "engine": "full",
+      "preparation": 0.25,
+      "playback": 2.5,
+      "recovery": 0.35,
+      "settle": 0.12,
+      "status": "adapted-for-review",
+      "cycles": 1,
+      "roles": [
+        "relaxed-idle"
+      ],
+      "note": "Relaxed authored idle with closed sword hand; travel-carry angle still needs visual review.",
+      "credit": {
+        "text": "Universal Animation Library \u2014 Quaternius \u2014 CC0 1.0",
+        "url": "https://quaternius.itch.io/universal-animation-library"
+      }
+    }
+  ],
+  "missing": [
+    {
+      "id": "light-directions",
+      "name": "Full 24 light executions",
+      "reason": "Six distinct source cuts are adapted. The designed twelve directions with two individually authored executions each are not all present; do not relabel mirrored or repeated clips as new executions."
+    },
+    {
+      "id": "heavy-variants",
+      "name": "Six distinct heavy executions",
+      "reason": "Three heavy source cuts are adapted. The second individually authored execution for each designed heavy direction is still required."
+    },
+    {
+      "id": "paired-finishers",
+      "name": "Five paired finishers and victim tracks",
+      "reason": "The downloaded set has no matching paired chest-cleave/disarm/throat-cut/dismemberment finishers. They need custom paired choreography, contacts, prop/gore timing and camera paths."
+    },
+    {
+      "id": "thrust",
+      "name": "Dedicated straight thrust / thrust riposte",
+      "reason": "Phase A has a stationary authored extension study; this single-handed library currently supplies a dash-cut candidate rather than mislabelling a cut as a thrust."
+    },
+    {
+      "id": "directional-defense",
+      "name": "Omnidirectional block/parry interception",
+      "reason": "One block/parry family is adapted. Target-relative interception and distinct rear/side poses still need authoring and validation."
+    },
+    {
+      "id": "interruptions",
+      "name": "Pose-matched interruptions, hit outcomes and chains",
+      "reason": "Individual actions preview correctly in isolation; arbitrary live transitions and shared contact/damage markers require combat integration."
+    },
+    {
+      "id": "production",
+      "name": "Final locomotion/roll contacts, armor/finger/cloth and gore polish",
+      "reason": "Review candidates are not final production acceptance. No damage, invulnerability, slow motion, enemy coordination or sword-drop behavior is added by this library."
+    },
+    {
+      "id": "movement-handoffs",
+      "name": "Turns, slope/collision contacts and movement handoffs",
+      "reason": "Eight-way movement/evasion and guarded movement are previewed. Target-facing turns, sprint curves, run-to-attack braking, phase-matched starts/stops, slopes and collision-shortened travel still require live-controller contact work."
+    }
+  ]
+}

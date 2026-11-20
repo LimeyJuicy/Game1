@@ -6,7 +6,7 @@ test('low carry preserves source legs and free arm with a stable attached sword'
   const errors: string[] = [];
   page.on('pageerror', error => errors.push(error.message));
   page.on('console', message => { if (message.type() === 'error') errors.push(message.text()); });
-  await page.goto('/');
+  await page.goto('/?mode=animation');
   await expect(page.locator('#clip')).toHaveValue('carry:Walk_Loop');
   await page.getByRole('button', { name: 'Pause', exact: true }).click();
   const state = () => page.evaluate(() => (window as any).__rigWorkbench);

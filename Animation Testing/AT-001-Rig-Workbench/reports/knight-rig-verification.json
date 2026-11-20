@@ -1,0 +1,9 @@
+{
+  "originalBytesPreserved": true,
+  "materialsPreserved": true,
+  "verticesChecked": 167063,
+  "bones": 66,
+  "clips": 43,
+  "maximumBindError": 5.1059962753581215e-8,
+  "result": "PASS: structural checks only; deformation appearance requires visual review"
+}

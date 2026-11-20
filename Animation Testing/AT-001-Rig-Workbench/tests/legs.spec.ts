@@ -10,7 +10,7 @@ test('legs study plants its support foot, keeps upper joints still, and exposes 
     const screenshotDriverNotice = message.text().includes('GPU stall due to ReadPixels');
     if (message.type() === 'error' || (message.type() === 'warning' && !screenshotDriverNotice)) errors.push(message.text());
   });
-  await page.goto('/?reference=soldier');
+  await page.goto('/?mode=animation&reference=soldier');
   await expect(page.locator('#clip')).toHaveValue('legs');
   await page.getByRole('button', { name: 'Pause', exact: true }).click();
   const info = await state(page);
